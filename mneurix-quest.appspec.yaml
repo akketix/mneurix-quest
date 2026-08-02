@@ -1,0 +1,34 @@
+name: mneurix-quest
+region: fra
+features:
+  - buildpack-stack=ubuntu-22
+services:
+  - name: web
+    github:
+      repo: akketix/mneurix-quest
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    http_port: 8080
+    build_command: cd site && npm install && npm run build
+    run_command: cd site && node ./dist/server/entry.mjs
+    health_check:
+      http_path: /api/status
+      initial_delay_seconds: 15
+    envs:
+      - key: HOST
+        value: 0.0.0.0
+        scope: RUN_AND_BUILD_TIME
+      - key: PORT
+        value: "8080"
+        scope: RUN_AND_BUILD_TIME
+      - key: PUBLIC_ADSENSE_CLIENT
+        value: ca-pub-4548561758943925
+        scope: RUN_AND_BUILD_TIME
+domains:
+  - domain: mneurix.quest
+    type: PRIMARY
+  - domain: www.mneurix.quest
+    type: ALIAS

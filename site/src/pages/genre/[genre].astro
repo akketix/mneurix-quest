@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return [
+    { params: { genre: 'rts' }, props: { title: 'Real-Time Strategy Intel', genreTag: 'RTS' } },
+    { params: { genre: 'mmo' }, props: { title: 'MMO Radar & Expansions', genreTag: 'MMO' } },
+    { params: { genre: 'rpg' }, props: { title: 'Role-Playing Game Devlogs', genreTag: 'RPG' } },
+  ];
+}
+
+const { title, genreTag } = Astro.props;
+
+const allPosts = await getCollection('news');
+const filteredPosts = allPosts
+  .filter(p => p.data.genre.toUpperCase() === genreTag.toUpperCase())
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title={`MNEURIX // ${genreTag} — ${title}`}>
+  <div class="container">
+    <div style="margin: 32px 0 24px;">
+      <div class="eyebrow">SECTOR INTEL // {genreTag}</div>
+      <h1 style="font-size: 32px; color: var(--text-heading);">{title}</h1>
+      <p style="color: var(--text-muted); margin-top: 8px;">
+        Filtered coverage tracking verified press updates for {genreTag} titles.
+      </p>
+    </div>
+
+    <div class="news-grid">
+      {filteredPosts.length === 0 ? (
+        <div style="grid-column: 1 / -1; padding: 48px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; text-align: center;">
+          <p style="color: var(--text-muted); font-family: var(--mono);">No verified press releases logged for {genreTag} yet.</p>
+        </div>
+      ) : (
+        filteredPosts.map((post) => (
+          <article class="news-card">
+            <a href={`/news/${post.slug}`}>
+              <img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+            </a>
+            <div class="news-card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class={`tech-pill ${post.data.genre.toLowerCase()}`}>{post.data.genre}</span>
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">
+                  {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+              <h2 class="news-card-title">
+                <a href={`/news/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <p class="news-card-summary">{post.data.summary}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;">
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">{post.data.developer}</span>
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--cyan);">Impact: {post.data.impactScore}/10</span>
+              </div>
+            </div>
+          </article>
+        ))
+      )}
+    </div>
+  </div>
+</Layout>

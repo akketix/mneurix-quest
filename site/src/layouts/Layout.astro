@@ -1,0 +1,211 @@
+---
+import '../styles/global.css';
+import { SITE_CONFIG } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = `${SITE_CONFIG.name} — Autonomous RTS, MMO & RPG News Intelligence`,
+  description = SITE_CONFIG.description,
+  image = `${SITE_CONFIG.url}/og-image.png`
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const adsenseClient = SITE_CONFIG.adsense.client;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="MNEURIX, mneurix.quest, gaming news, RTS, MMO, RPG, Path of Exile 2, Stormgate, World of Warcraft, autonomous journalism" />
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- AdSense Meta Tag -->
+    <meta name="google-adsense-account" content={adsenseClient} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_CONFIG.name} RSS Feed`} href="/rss.xml" />
+    <meta name="theme-color" content="#0a0d12" />
+
+    <!-- JSON-LD Structured Data (Matching mneurix.dev) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MNEURIX",
+      "url": SITE_CONFIG.url,
+      "description": SITE_CONFIG.description,
+      "logo": `${SITE_CONFIG.url}/favicon.svg`,
+      "slogan": SITE_CONFIG.slogan,
+      "email": SITE_CONFIG.email
+    })} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": SITE_CONFIG.name,
+      "url": SITE_CONFIG.url,
+      "description": SITE_CONFIG.description
+    })} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Cookie Consent Banner (Exact mneurix.dev pattern) -->
+    <div id="cookie-banner" class="cookie-banner" hidden>
+      <p class="cb-text">
+        We use cookies for ad measurement (Google AdSense) on content pages.
+        <a href="/cookies">Cookie policy</a>.
+      </p>
+      <div class="cb-actions">
+        <button id="cb-decline" type="button" class="btn">Decline</button>
+        <button id="cb-accept" type="button" class="btn primary">Accept</button>
+      </div>
+    </div>
+
+    <!-- AdSense & Consent Script (Exact mneurix.dev pattern) -->
+    <script is:inline define:vars={{ CLIENT: adsenseClient, allowAds: SITE_CONFIG.adsense.allowAds, STORAGE_KEY: SITE_CONFIG.adsense.storageKey, MAX_AGE_DAYS: SITE_CONFIG.adsense.maxAgeDays }}>
+      (function(){
+        function read() {
+          try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (e) { return null; }
+        }
+        function write(v) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: v, t: Date.now() }));
+        }
+        function injectAds() {
+          if (!allowAds || !CLIENT) return;
+          if (document.querySelector('script[data-mneurix-adsense]')) return;
+          var s = document.createElement("script");
+          s.async = true;
+          s.crossOrigin = "anonymous";
+          s.setAttribute("data-mneurix-adsense", "1");
+          s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + CLIENT;
+          document.head.appendChild(s);
+        }
+        function show() { var b = document.getElementById("cookie-banner"); if (b) b.hidden = false; }
+        function hide() { var b = document.getElementById("cookie-banner"); if (b) b.hidden = true; }
+
+        var gpc = (typeof navigator !== "undefined" && navigator.globalPrivacyControl === true);
+        if (gpc) {
+          write("declined");
+          hide();
+          return;
+        }
+
+        var c = read();
+        var fresh = c && (Date.now() - c.t < MAX_AGE_DAYS * 86400000);
+        if (c && fresh) {
+          if (c.v === "accepted") injectAds();
+        } else {
+          show();
+        }
+
+        function wire() {
+          var acc = document.getElementById("cb-accept");
+          var dec = document.getElementById("cb-decline");
+          if (acc) acc.addEventListener("click", function () { write("accepted"); injectAds(); hide(); });
+          if (dec) dec.addEventListener("click", function () { write("declined"); hide(); });
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", wire);
+        } else {
+          wire();
+        }
+      })();
+    </script>
+
+    <!-- AdBlock Detection Script (Exact mneurix.dev pattern) -->
+    <script is:inline>
+      (function() {
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            var ads = document.querySelectorAll('ins.adsbygoogle');
+            var isBlocked = false;
+
+            if (typeof window.adsbygoogle === 'undefined' || !window.adsbygoogle.loaded) {
+              isBlocked = true;
+            }
+
+            ads.forEach(function(ins) {
+              if (isBlocked || ins.offsetHeight === 0 || ins.innerHTML.trim() === '' || ins.getAttribute('data-ad-status') === 'unfilled') {
+                var parent = ins.parentElement;
+                if (parent && !parent.querySelector('.adblock-fallback-card')) {
+                  var fallback = document.createElement('div');
+                  fallback.className = 'adblock-fallback-card';
+                  fallback.innerHTML = '<div class="adblock-fallback-title">⚡ MNEURIX Intel Pipeline</div><div style="font-size: 12px; line-height: 1.5;">All press breakdowns on MNEURIX.QUEST are generated by autonomous AI agents. Consider disabling your ad blocker to support free open-source development!</div>';
+                  ins.style.display = 'none';
+                  parent.appendChild(fallback);
+                }
+              }
+            });
+          }, 1500);
+        });
+      })();
+    </script>
+
+    <header class="nav">
+      <a class="wordmark" href="/">
+        MNEURIX <span class="slash">//</span> QUEST
+      </a>
+      <nav class="nav-links">
+        <a href="/" class={pathname === '/' ? 'active' : ''}>ALL INTEL</a>
+        <a href="/genre/rts" class={pathname.includes('/rts') ? 'active' : ''}>RTS</a>
+        <a href="/genre/mmo" class={pathname.includes('/mmo') ? 'active' : ''}>MMO</a>
+        <a href="/genre/rpg" class={pathname.includes('/rpg') ? 'active' : ''}>RPG</a>
+        <a href="/rss.xml" target="_blank">RSS ↗</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="foot-grid">
+          <div>
+            <div class="wordmark">MNEURIX <span class="slash">//</span> QUEST</div>
+            <p class="muted" style="margin-top: 8px; font-size: 13.5px; color: var(--text-muted);">
+              {SITE_CONFIG.description}
+            </p>
+          </div>
+          <div>
+            <div class="foot-label">Portals</div>
+            <ul style="list-style: none;">
+              <li><a href="/genre/rts">RTS Intelligence</a></li>
+              <li><a href="/genre/mmo">MMO Radar</a></li>
+              <li><a href="/genre/rpg">RPG Devlogs</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="foot-label">Ecosystem</div>
+            <ul style="list-style: none;">
+              <li><a href="https://mneurix.dev" target="_blank" rel="noopener">MNEURIX.DEV Main Studio ↗</a></li>
+              <li><a href="/rss.xml">Public RSS Feed</a></li>
+              <li><a href="/cookies">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          © 2026 MNEURIX. Independent R&D. Built with Astro & Agentic Ingestion.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

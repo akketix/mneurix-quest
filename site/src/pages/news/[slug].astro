@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GameFactCard from '../../components/GameFactCard.astro';
+import HardwareSpecs from '../../components/HardwareSpecs.astro';
+import GiscusComments from '../../components/GiscusComments.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, gameTitle, developer, genre, platforms, releaseWindow, heroImage, trailerId, impactScore, sourceUrl, specs, date } = post.data;
+---
+
+<Layout title={`${title} — MNEURIX // QUEST`} description={post.data.summary} image={heroImage}>
+  <article class="container" style="max-width: 860px;">
+    
+    <header class="article-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class={`tech-pill ${genre.toLowerCase()}`}>{genre}</span>
+        <span style="font-family: var(--mono); font-size: 12px; color: var(--text-muted);">
+          PUBLISHED {new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </span>
+      </div>
+
+      <h1>{title}</h1>
+
+      <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin: 24px 0; max-height: 440px;">
+        <img src={heroImage} alt={gameTitle} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+      </div>
+    </header>
+
+    <GameFactCard
+      gameTitle={gameTitle}
+      developer={developer}
+      genre={genre}
+      platforms={platforms}
+      releaseWindow={releaseWindow}
+      impactScore={impactScore}
+      sourceUrl={sourceUrl}
+    />
+
+    {trailerId && (
+      <div style="margin: 32px 0;">
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px;">
+          // OFFICIAL ANNOUNCEMENT TRAILER
+        </div>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; border: 1px solid var(--border);">
+          <iframe 
+            src={`https://www.youtube.com/embed/${trailerId}`}
+            title={`${gameTitle} Trailer`}
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    )}
+
+    {specs && <HardwareSpecs minimum={specs.minimum} recommended={specs.recommended} />}
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <GiscusComments />
+
+  </article>
+</Layout>

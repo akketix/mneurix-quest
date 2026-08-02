@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('news');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title="MNEURIX // QUEST — Autonomous RTS, MMO & RPG News Intelligence">
+  <div class="container">
+    
+    <!-- Hero Banner matching mneurix.dev visual style -->
+    <section class="hero-banner">
+      <div class="eyebrow">Autonomous R&D Intelligence Radar</div>
+      <h1>MNEURIX <span class="slash">//</span> QUEST</h1>
+      <p style="font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 20px;">
+        High-signal press release intelligence and devlog breakdowns for Real-Time Strategy, MMO Expansions, and Deep RPG Systems.
+      </p>
+      <div class="tech-badge-group">
+        <span class="tech-pill rts">RTS Intel</span>
+        <span class="tech-pill mmo">MMO Radar</span>
+        <span class="tech-pill rpg">RPG Devlogs</span>
+        <span class="tech-pill">Zero-Slop Pipeline</span>
+      </div>
+    </section>
+
+    <!-- Genre Portals -->
+    <section class="pillar-grid">
+      <a class="pillar-card" href="/genre/rts">
+        <div class="pillar-code">SECTOR 01 // RTS</div>
+        <h2 class="pillar-title">Real-Time Strategy</h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Build orders, balance notes, engine updates, and competitive mechanics for upcoming RTS titles.
+        </p>
+        <span style="font-family: var(--mono); font-size: 12px; color: var(--cyan);">View RTS Intel →</span>
+      </a>
+
+      <a class="pillar-card" href="/genre/mmo">
+        <div class="pillar-code">SECTOR 02 // MMO</div>
+        <h2 class="pillar-title">Massively Multiplayer</h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Expansion reveals, beta access windows, raid features, and economy overhauls.
+        </p>
+        <span style="font-family: var(--mono); font-size: 12px; color: var(--cyan);">View MMO Radar →</span>
+      </a>
+
+      <a class="pillar-card" href="/genre/rpg">
+        <div class="pillar-code">SECTOR 03 // RPG</div>
+        <h2 class="pillar-title">Role-Playing Games</h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Skill trees, narrative devlogs, itemization reworks, and launch dates.
+        </p>
+        <span style="font-family: var(--mono); font-size: 12px; color: var(--cyan);">View RPG Devlogs →</span>
+      </a>
+    </section>
+
+    <!-- Latest Intelligence Stream -->
+    <section style="margin-top: 40px;">
+      <div style="font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-bottom: 16px;">
+        // LIVE AGENTIC INTEL STREAM
+      </div>
+
+      <div class="news-grid">
+        {sortedPosts.map((post) => (
+          <article class="news-card">
+            <a href={`/news/${post.slug}`}>
+              <img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+            </a>
+            <div class="news-card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class={`tech-pill ${post.data.genre.toLowerCase()}`}>{post.data.genre}</span>
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">
+                  {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+              <h2 class="news-card-title">
+                <a href={`/news/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <p class="news-card-summary">{post.data.summary}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;">
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">{post.data.developer}</span>
+                <span style="font-family: var(--mono); font-size: 11px; color: var(--cyan);">Impact: {post.data.impactScore}/10</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</Layout>

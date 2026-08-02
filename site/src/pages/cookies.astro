@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<Layout title={`Cookie Policy — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 800px; margin: 40px auto;">
+    <div class="eyebrow">LEGAL & PRIVACY</div>
+    <h1 style="font-size: 32px; color: var(--text-heading); margin: 12px 0 24px;">Cookie Policy</h1>
+
+    <div class="article-body">
+      <p>
+        At <strong>{SITE_CONFIG.name}</strong> (`mneurix.quest`), we use cookies to provide essential site functionality and analyze ad measurement performance via Google AdSense.
+      </p>
+
+      <h2>1. Google AdSense & Third-Party Cookies</h2>
+      <p>
+        We use Google AdSense (`ca-pub-4548561758943925`) to serve non-personalized and personalized advertising. Google uses cookies to serve ads based on prior visits to our site or other websites on the internet.
+      </p>
+
+      <h2>2. Global Privacy Control (GPC) & Consent</h2>
+      <p>
+        Our site automatically respects your browser's <strong>Global Privacy Control (GPC)</strong> signal. If your browser sends a GPC signal, consent is automatically set to <em>Declined</em> and no AdSense scripts are injected.
+      </p>
+
+      <p>
+        You can update your cookie preferences at any time by clearing your browser's `localStorage` key <code>mneurix-consent</code>.
+      </p>
+    </div>
+  </div>
+</Layout>

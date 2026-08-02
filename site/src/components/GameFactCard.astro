@@ -1,0 +1,58 @@
+---
+export interface Props {
+  gameTitle: string;
+  developer: string;
+  genre: 'RTS' | 'MMO' | 'RPG';
+  platforms: string[];
+  releaseWindow: string;
+  impactScore: number;
+  sourceUrl?: string;
+}
+
+const { gameTitle, developer, genre, platforms, releaseWindow, impactScore, sourceUrl } = Astro.props;
+---
+
+<div class="fact-card">
+  <div class="fact-item">
+    <div class="label">TARGET GAME</div>
+    <div class="value">{gameTitle}</div>
+  </div>
+  
+  <div class="fact-item">
+    <div class="label">DEVELOPER / PUB</div>
+    <div class="value">{developer}</div>
+  </div>
+
+  <div class="fact-item">
+    <div class="label">GENRE</div>
+    <div class="value">
+      <span class={`tech-pill ${genre.toLowerCase()}`}>{genre}</span>
+    </div>
+  </div>
+
+  <div class="fact-item">
+    <div class="label">TARGET WINDOW</div>
+    <div class="value">{releaseWindow}</div>
+  </div>
+
+  <div class="fact-item">
+    <div class="label">PLATFORMS</div>
+    <div class="value">{platforms.join(', ')}</div>
+  </div>
+
+  <div class="fact-item">
+    <div class="label">IMPACT SCORE</div>
+    <div class="value" style="color: var(--cyan); font-family: var(--mono);">
+      {impactScore} / 10
+    </div>
+  </div>
+
+  {sourceUrl && (
+    <div class="fact-item" style="grid-column: 1 / -1;">
+      <div class="label">VERIFIED PRESS SOURCE</div>
+      <div class="value" style="font-size: 13px;">
+        <a href={sourceUrl} target="_blank" rel="noopener noreferrer">Original Release Source ↗</a>
+      </div>
+    </div>
+  )}
+</div>
