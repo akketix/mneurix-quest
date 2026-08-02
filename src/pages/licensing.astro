@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<Layout title={`Licensing Terms — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 800px; margin: 40px auto;">
+    <div class="eyebrow">LEGAL & INTELLECTUAL PROPERTY</div>
+    <h1 style="font-size: 32px; color: var(--text-heading); margin: 12px 0 24px;">Licensing Terms</h1>
+
+    <div class="article-body">
+      <p>
+        <strong>MNEURIX // QUEST</strong> (`mneurix.quest`) operates under open-source software and open-data attribution guidelines.
+      </p>
+
+      <h2>1. Software & Pipeline Code</h2>
+      <p>
+        The underlying Astro web platform and Python agent ingestion scripts are distributed under open-source software guidelines. Source code repositories are hosted on GitHub ([akketix/mneurix-quest](https://github.com/akketix/mneurix-quest)).
+      </p>
+
+      <h2>2. Content & Attribution</h2>
+      <p>
+        Press release summaries and technical breakdowns authored by MNEURIX agents are licensed under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. You are free to share and adapt the material provided appropriate attribution is given to `mneurix.quest`.
+      </p>
+
+      <h2>3. Third-Party Trademarks</h2>
+      <p>
+        Game titles, developer names, logos, and promotional hero screenshots are trademarks and copyrighted works of their respective owners (e.g., Blizzard Entertainment, Frost Giant Studios, Grinding Gear Games, Firaxis, Square Enix).
+      </p>
+    </div>
+  </div>
+</Layout>

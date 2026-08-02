@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE_CONFIG } from '../../config';
+---
+
+<Layout title={`PC Specs & VRAM Compatibility Calculator — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 860px; margin: 40px auto;">
+    
+    <div class="eyebrow">CLIENT-SIDE UTILITY // HARDWARE RADAR</div>
+    <h1 style="font-size: 34px; color: var(--text-heading); margin: 12px 0 16px;">PC Specs & VRAM Compatibility Calculator</h1>
+    <p style="color: var(--text-muted); margin-bottom: 32px;">
+      Evaluate whether your PC hardware setup meets the minimum and recommended targets for upcoming RTS, MMO, and RPG releases.
+    </p>
+
+    <!-- Calculator Card -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px;">
+      <form id="calc-form" style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <div>
+          <label style="display: block; font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px;">
+            Select Target Game Title
+          </label>
+          <select id="game-select" style="width: 100%; padding: 12px; border-radius: 6px; background: rgba(14, 19, 27, 0.9); border: 1px solid var(--border); color: var(--text-heading); font-family: var(--sans); font-size: 15px;">
+            <option value="poe2">Path of Exile 2 (RPG) — UE5 Engine Target</option>
+            <option value="stormgate">Stormgate (RTS) — 64Hz SnowPlay Engine</option>
+            <option value="wow">World of Warcraft: The War Within (MMO)</option>
+            <option value="civ7">Civilization VII (RTS) — 4K Era Engine</option>
+            <option value="avowed">Avowed (RPG) — First-Person Living Lands</option>
+            <option value="kcd2">Kingdom Come: Deliverance II (RPG) — CryEngine</option>
+          </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div>
+            <label style="display: block; font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+              System RAM (GB)
+            </label>
+            <select id="ram-select" style="width: 100%; padding: 10px; border-radius: 6px; background: rgba(14, 19, 27, 0.9); border: 1px solid var(--border); color: var(--text-heading);">
+              <option value="8">8 GB RAM</option>
+              <option value="16" selected>16 GB RAM</option>
+              <option value="32">32 GB RAM</option>
+              <option value="64">64 GB RAM</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+              GPU VRAM (GB)
+            </label>
+            <select id="vram-select" style="width: 100%; padding: 10px; border-radius: 6px; background: rgba(14, 19, 27, 0.9); border: 1px solid var(--border); color: var(--text-heading);">
+              <option value="4">4 GB VRAM (e.g. GTX 1050 Ti)</option>
+              <option value="6">6 GB VRAM (e.g. GTX 1060 / 2060)</option>
+              <option value="8" selected>8 GB VRAM (e.g. RTX 3070 / RX 6700)</option>
+              <option value="12">12 GB VRAM (e.g. RTX 4070)</option>
+              <option value="16">16+ GB VRAM (e.g. RTX 4080 / RX 7900)</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+              CPU Core Count
+            </label>
+            <select id="cpu-select" style="width: 100%; padding: 10px; border-radius: 6px; background: rgba(14, 19, 27, 0.9); border: 1px solid var(--border); color: var(--text-heading);">
+              <option value="4">4 Cores / 8 Threads</option>
+              <option value="6" selected>6 Cores / 12 Threads</option>
+              <option value="8">8+ Cores / 16 Threads</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" id="eval-btn" class="btn primary" style="width: 100%; padding: 14px; margin-top: 8px;">
+          Evaluate Hardware Compatibility →
+        </button>
+
+      </form>
+
+      <!-- Output Result Card -->
+      <div id="result-box" style="margin-top: 24px; padding: 20px; border-radius: 8px; background: rgba(14, 19, 27, 0.85); border: 1px solid var(--border); display: none;">
+        <div id="result-badge" style="font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 8px;"></div>
+        <p id="result-text" style="font-size: 14.5px; color: var(--text-body); line-height: 1.6; margin: 0;"></p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script is:inline>
+    (function() {
+      const btn = document.getElementById('eval-btn');
+      const box = document.getElementById('result-box');
+      const badge = document.getElementById('result-badge');
+      const text = document.getElementById('result-text');
+
+      if (!btn) return;
+
+      const GAME_SPECS = {
+        poe2: { minRam: 16, minVram: 6, recRam: 32, recVram: 12, name: "Path of Exile 2" },
+        stormgate: { minRam: 16, minVram: 6, recRam: 32, recVram: 8, name: "Stormgate" },
+        wow: { minRam: 8, minVram: 4, recRam: 16, recVram: 8, name: "World of Warcraft: The War Within" },
+        civ7: { minRam: 8, minVram: 4, recRam: 16, recVram: 8, name: "Civilization VII" },
+        avowed: { minRam: 16, minVram: 6, recRam: 16, recVram: 8, name: "Avowed" },
+        kcd2: { minRam: 16, minVram: 6, recRam: 32, recVram: 10, name: "Kingdom Come: Deliverance II" }
+      };
+
+      btn.addEventListener('click', function() {
+        const gameId = document.getElementById('game-select').value;
+        const ram = parseInt(document.getElementById('ram-select').value, 10);
+        const vram = parseInt(document.getElementById('vram-select').value, 10);
+        const spec = GAME_SPECS[gameId];
+
+        box.style.display = 'block';
+
+        if (ram >= spec.recRam && vram >= spec.recVram) {
+          badge.style.color = '#5eead4';
+          badge.textContent = '⚡ OPTIMAL SPEC — 1440p / 4K HIGH TARGET COMPATIBLE';
+          text.textContent = 'Your hardware meets or exceeds the recommended hardware spec for ' + spec.name + '. Expect smooth frame rates and high graphical fidelity.';
+        } else if (ram >= spec.minRam && vram >= spec.minVram) {
+          badge.style.color = '#38bdf8';
+          badge.textContent = '✔ RECOMMENDED SPEC — 1080p SOLID TARGET';
+          text.textContent = 'Your setup fulfills the minimum requirements for ' + spec.name + '. Upgrading RAM to ' + spec.recRam + ' GB or VRAM will provide extra stability during dense unit battles.';
+        } else {
+          badge.style.color = '#f59e0b';
+          badge.textContent = '⚠️ BELOW RECOMMENDED — GRAPHICAL REDUCTION REQUIRED';
+          text.textContent = 'Your hardware is below the recommended target for ' + spec.name + '. Consider lowering shadow quality, texture resolution, or resolution scaling.';
+        }
+      });
+    })();
+  </script>
+</Layout>

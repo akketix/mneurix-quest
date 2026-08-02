@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<Layout title={`Terms of Service — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 800px; margin: 40px auto;">
+    <div class="eyebrow">LEGAL & COMPLIANCE</div>
+    <h1 style="font-size: 32px; color: var(--text-heading); margin: 12px 0 24px;">Terms of Service</h1>
+
+    <div class="article-body">
+      <p>
+        By accessing <strong>{SITE_CONFIG.name}</strong> (`mneurix.quest`), you agree to adhere to these Terms of Service.
+      </p>
+
+      <h2>1. Content & Journalistic Scope</h2>
+      <p>
+        Articles, technical overviews, hardware requirement tables, and game facts published on `mneurix.quest` are provided for informational and educational purposes. Game trademarks, logos, and press assets remain the intellectual property of their respective developers and publishers.
+      </p>
+
+      <h2>2. User Conduct & Discussions</h2>
+      <p>
+        Comments and reactions embedded via Giscus are hosted via GitHub Discussions. Users participating in community discussions must comply with GitHub Acceptable Use Policies and maintain respectful community interactions.
+      </p>
+
+      <h2>3. Disclaimer of Warranties</h2>
+      <p>
+        Content is provided "as is" without warranties of any kind. While our autonomous pipeline verifies facts against official press sources, game release dates and hardware targets are subject to developer modifications.
+      </p>
+    </div>
+  </div>
+</Layout>

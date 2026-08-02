@@ -168,6 +168,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         <a href="/genre/rts" class={pathname.includes('/rts') ? 'active' : ''}>RTS</a>
         <a href="/genre/mmo" class={pathname.includes('/mmo') ? 'active' : ''}>MMO</a>
         <a href="/genre/rpg" class={pathname.includes('/rpg') ? 'active' : ''}>RPG</a>
+        <a href="/tools/specs-calculator" class={pathname.includes('/tools') ? 'active' : ''}>TOOLS</a>
         <a href="/rss.xml" target="_blank">RSS ↗</a>
       </nav>
     </header>
@@ -178,6 +179,60 @@ const adsenseClient = SITE_CONFIG.adsense.client;
 
     <footer class="footer">
       <div class="container">
+        
+        <!-- Waitlist / Newsletter Band (Matching mneurix.dev) -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 40px;" id="waitlist">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: center;">
+            <div>
+              <div class="foot-label">STAY IN THE LOOP</div>
+              <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
+                Get weekly curated RTS, MMO, and RPG intelligence digests directly to your inbox. Zero spam.
+              </p>
+            </div>
+
+            <form id="waitlist-form" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <input type="email" name="email" placeholder="you@example.com" required style="flex-grow: 1; padding: 10px 14px; border-radius: 6px; background: rgba(14, 19, 27, 0.9); border: 1px solid var(--border); color: var(--text-heading); font-size: 14px;" />
+              <!-- Honeypot -->
+              <input type="text" name="company" tabindex="-1" autocomplete="off" style="display: none;" />
+              <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+          </div>
+          <p id="wl-msg" style="font-family: var(--mono); font-size: 12px; margin-top: 10px; display: none;"></p>
+        </div>
+
+        <script is:inline>
+          (function() {
+            var f = document.getElementById('waitlist-form');
+            var msg = document.getElementById('wl-msg');
+            if (!f) return;
+
+            f.addEventListener('submit', async function(e) {
+              e.preventDefault();
+              var data = new FormData(f);
+              try {
+                var r = await fetch('/api/waitlist', {
+                  method: 'POST',
+                  headers: { 'content-type': 'application/json' },
+                  body: JSON.stringify(Object.fromEntries(data))
+                });
+                var j = await r.json();
+                msg.style.display = 'block';
+                if (r.ok && j.ok) {
+                  msg.style.color = '#5eead4';
+                  msg.textContent = j.already ? "You're already on the intel digest list!" : "You're subscribed to the MNEURIX Intel digest!";
+                } else {
+                  msg.style.color = '#f59e0b';
+                  msg.textContent = 'Please enter a valid email address.';
+                }
+              } catch(err) {
+                msg.style.display = 'block';
+                msg.style.color = '#f59e0b';
+                msg.textContent = 'Network error — please try again.';
+              }
+            });
+          })();
+        </script>
+
         <div class="foot-grid">
           <div>
             <div class="wordmark">MNEURIX <span class="slash">//</span> QUEST</div>
@@ -194,10 +249,20 @@ const adsenseClient = SITE_CONFIG.adsense.client;
             </ul>
           </div>
           <div>
-            <div class="foot-label">Ecosystem</div>
+            <div class="foot-label">Studio</div>
             <ul style="list-style: none;">
+              <li><a href="/about">About MNEURIX</a></li>
+              <li><a href="/tools/specs-calculator">PC Specs Calculator</a></li>
               <li><a href="https://mneurix.dev" target="_blank" rel="noopener">MNEURIX.DEV Main Studio ↗</a></li>
               <li><a href="/rss.xml">Public RSS Feed</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="foot-label">Legal</div>
+            <ul style="list-style: none;">
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+              <li><a href="/licensing">Licensing Terms</a></li>
               <li><a href="/cookies">Cookie Policy</a></li>
             </ul>
           </div>

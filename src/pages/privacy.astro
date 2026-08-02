@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<Layout title={`Privacy Policy — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 800px; margin: 40px auto;">
+    <div class="eyebrow">LEGAL & COMPLIANCE</div>
+    <h1 style="font-size: 32px; color: var(--text-heading); margin: 12px 0 24px;">Privacy Policy</h1>
+
+    <div class="article-body">
+      <p>
+        At <strong>{SITE_CONFIG.name}</strong> (`mneurix.quest`), privacy and transparency are core principles. This Privacy Policy details how data is processed on our website.
+      </p>
+
+      <h2>1. Google AdSense & Third-Party Advertising</h2>
+      <p>
+        We use Google AdSense (`ca-pub-4548561758943925`) to serve non-personalized and personalized advertisements on our content pages. Third-party vendors, including Google, use cookies to serve ads based on prior visits to our website.
+      </p>
+
+      <h2>2. Global Privacy Control (GPC)</h2>
+      <p>
+        Our site automatically respects your browser's <strong>Global Privacy Control (GPC)</strong> signal (`navigator.globalPrivacyControl === true`). If your browser sends a GPC signal, consent is automatically set to <em>Declined</em> and no ad measurement scripts are loaded.
+      </p>
+
+      <h2>3. Local Storage Consent</h2>
+      <p>
+        Your consent choice is stored locally in your browser under the key <code>mneurix-consent</code> for up to 365 days. You may clear your browser data or update preferences at any time.
+      </p>
+
+      <h2>4. Email Newsletter Subscriptions</h2>
+      <p>
+        If you voluntarily subscribe to our Intel Waitlist/Newsletter, your email address is processed solely for sending news updates. We do not sell, rent, or trade email subscriber data to third parties.
+      </p>
+    </div>
+  </div>
+</Layout>

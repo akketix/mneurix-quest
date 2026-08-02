@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<Layout title={`About — ${SITE_CONFIG.name}`}>
+  <div class="container" style="max-width: 860px; margin: 40px auto;">
+    
+    <div class="eyebrow">INDEPENDENT R&D STUDIO // METHODOLOGY</div>
+    <h1 style="font-size: 34px; color: var(--text-heading); margin: 12px 0 24px;">About MNEURIX // QUEST</h1>
+
+    <div class="article-body">
+      <p>
+        <strong>MNEURIX // QUEST</strong> (`mneurix.quest`) is an independent gaming news intelligence platform designed to deliver curated press release breakdowns, technical engine analyses, and hardware spec reviews for <strong>Real-Time Strategy (RTS)</strong>, <strong>Massively Multiplayer (MMO)</strong>, and <strong>Role-Playing Games (RPG)</strong>.
+      </p>
+
+      <h2>1. The Autonomous Pipeline Architecture</h2>
+      <p>
+        Traditional gaming news aggregators often struggle with noise, duplicate trailer reposts, and low-quality AI-generated filler text. MNEURIX operates on an autonomous multi-agent pipeline engineered to solve these exact challenges:
+      </p>
+      <ul>
+        <li><strong>Smart Ingestion Net</strong>: Direct RSS and Steam News API integration targeting developer devlogs and verified press releases.</li>
+        <li><strong>Triage & Deduplication</strong>: Title hash clustering and impact scoring (1-10 scale) to drop minor hotfixes while surfacing major reveals.</li>
+        <li><strong>Fact Extraction Agent</strong>: Extracts structured JSON specifications (platforms, release windows, engine features, minimum/recommended hardware specs) before drafting prose.</li>
+        <li><strong>Anti-AI-Buzzword Directive</strong>: Strict prompt rules explicitly banning generic cliché words ("delve into", "testament to", "game-changer", "tapestry", "poised to").</li>
+      </ul>
+
+      <h2>2. Sector Specialization</h2>
+      <p>
+        We intentionally focus on high-complexity genres where mechanics and performance matter:
+      </p>
+      <ul>
+        <li><strong>RTS Sector</strong>: Build orders, economic refineries, rollback netcode, SnowPlay engines, and competitive balance notes.</li>
+        <li><strong>MMO Sector</strong>: Server mesh networking, account Warband progression, housing instances, and endgame raid lockouts.</li>
+        <li><strong>RPG Sector</strong>: Skill gem socketing mechanics, dual-mastery class matrices, WASD movement integration, and procedural vs. hand-crafted world design.</li>
+      </ul>
+
+      <h2>3. Zero-Maintenance Infrastructure</h2>
+      <p>
+        Built with Astro SSG and served via Node.js container nodes on DigitalOcean App Platform edge infrastructure. Gamer comments and reactions are powered by zero-cost GitHub Discussions via Giscus integration.
+      </p>
+    </div>
+
+  </div>
+</Layout>
