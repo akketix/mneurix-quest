@@ -30,6 +30,9 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="8qSn3ZVLnlt40LCcJiCCHc05pU7UPnyM2DOsf5pEZC4" />
 
+    <!-- Google AdSense Site Verification & Ad Script -->
+    <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossorigin="anonymous"></script>
+
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -91,16 +94,6 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         function write(v) {
           localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: v, t: Date.now() }));
         }
-        function injectAds() {
-          if (!allowAds || !CLIENT) return;
-          if (document.querySelector('script[data-mneurix-adsense]')) return;
-          var s = document.createElement("script");
-          s.async = true;
-          s.crossOrigin = "anonymous";
-          s.setAttribute("data-mneurix-adsense", "1");
-          s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + CLIENT;
-          document.head.appendChild(s);
-        }
         function show() { var b = document.getElementById("cookie-banner"); if (b) { b.removeAttribute("hidden"); b.classList.remove("hidden"); b.style.display = "flex"; } }
         function hide() { var b = document.getElementById("cookie-banner"); if (b) { b.setAttribute("hidden", ""); b.classList.add("hidden"); b.style.display = "none"; } }
 
@@ -114,7 +107,6 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         var c = read();
         var fresh = c && (Date.now() - c.t < MAX_AGE_DAYS * 86400000);
         if (c && fresh) {
-          if (c.v === "accepted") injectAds();
           hide();
         } else {
           show();
@@ -123,7 +115,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         function wire() {
           var acc = document.getElementById("cb-accept");
           var dec = document.getElementById("cb-decline");
-          if (acc) acc.addEventListener("click", function () { write("accepted"); injectAds(); hide(); });
+          if (acc) acc.addEventListener("click", function () { write("accepted"); hide(); });
           if (dec) dec.addEventListener("click", function () { write("declined"); hide(); });
         }
         if (document.readyState === "loading") {
