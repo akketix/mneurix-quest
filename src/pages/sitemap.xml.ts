@@ -1,6 +1,8 @@
 import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../config';
 
+export const prerender = true;
+
 export async function GET() {
   const posts = await getCollection('news');
   const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
@@ -48,8 +50,7 @@ ${articlesXml}
 
   return new Response(sitemapXml.trim(), {
     headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600'
+      'Content-Type': 'application/xml; charset=utf-8'
     }
   });
 }
