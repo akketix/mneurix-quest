@@ -6,7 +6,7 @@ developer: "CXMT / SK Hynix / Micron / Samsung"
 genre: "HARDWARE"
 platforms: ["PC"]
 releaseWindow: "Market Update 2026"
-heroImage: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop"
 impactScore: 9
 sourceUrl: "https://mneurix.quest/genre/hardware"
 summary: "ChangXin Memory Technologies (CXMT) accelerates DDR5 volume production, driving down consumer memory costs while ushering in DDR5-8000+ speeds and CUDIMM/CAMM2 form factors for gaming PCs."

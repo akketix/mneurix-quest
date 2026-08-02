@@ -7,7 +7,7 @@ This guide defines the explicit operational rules, schemas, and workflow for aut
 ## 1. Target Domain & Mission
 
 - **Domain**: `https://mneurix.quest`
-- **Focus**: Real-Time Strategy (**RTS**), Massively Multiplayer Online (**MMO**), and Role-Playing Games (**RPG**).
+- **Focus**: Real-Time Strategy (**RTS**), Massively Multiplayer Online (**MMO**), Role-Playing Games (**RPG**), and **Gaming Hardware Silicon**.
 - **Core Value**: High-signal, objective press release intelligence. Zero low-effort "AI slop" or buzzword filler.
 
 ---
@@ -20,9 +20,9 @@ Every generated article file MUST be placed in `src/content/news/{slug}.md` and 
 ---
 title: "Exact Descriptive Article Title"
 date: "YYYY-MM-DD"
-gameTitle: "Official Game Name"
-developer: "Developer or Publisher Name"
-genre: "RTS" | "MMO" | "RPG"
+gameTitle: "Official Game Name or Hardware Target"
+developer: "Developer, Publisher, or Manufacturer"
+genre: "RTS" | "MMO" | "RPG" | "HARDWARE"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "Q4 2026" or "Available Now"
 heroImage: "https://valid-image-url.jpg"
@@ -55,7 +55,17 @@ Agents generating content **MUST NOT** include any of the following cliché term
 
 ---
 
-## 4. Execution Commands
+## 4. Image Prompting & Curation Protocol
+
+Agents selecting or generating hero cover art MUST follow the rules in `IMAGE_PROMPTING_GUIDANCE.md`:
+
+- **Hardware Articles**: MUST use a macro close-up of RAM sticks, memory slots, silicon wafers, or motherboard sockets (e.g. `https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop`).
+- **No Generic Abstract Imagery**: Never use generic stock light trails or abstract blue servers for specific hardware pieces.
+- **Negative Quality Rules**: Exclude watermarks, blurry textures, white backgrounds, and low-contrast stock photos.
+
+---
+
+## 5. Execution Commands
 
 ### Ingest & Generate Dry Run
 ```bash
@@ -74,7 +84,7 @@ npm run build
 
 ---
 
-## 5. Automated Git Commit & Deployment Trigger
+## 6. Automated Git Commit & Deployment Trigger
 
 When a new article passes validation, publish it to Git:
 
