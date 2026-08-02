@@ -7,7 +7,7 @@ genre: "MMO"
 platforms: ["PC", "macOS"]
 releaseWindow: "Q3 2026"
 heroImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "9R9lB_ZtH0A"
 impactScore: 9
 sourceUrl: "https://worldofwarcraft.blizzard.com/"
 summary: "Blizzard details account-wide Warband progression, cross-realm guild features, and endgame Delve loot tables for World of Warcraft's tenth expansion."

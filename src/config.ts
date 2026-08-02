@@ -14,11 +14,11 @@ export const SITE_CONFIG = {
     maxAgeDays: 365
   },
 
-  // Giscus GitHub Discussions Setup
+  // Giscus GitHub Discussions Setup (akketix/mneurix-discussions)
   giscus: {
-    repo: "your-github-username/mneurix-discussions",
-    repoId: "R_kgDO...",
+    repo: "akketix/mneurix-discussions",
+    repoId: "R_kgDOTq8-_Q",
     category: "Announcements",
-    categoryId: "DIC_kwDO..."
+    categoryId: "DIC_kwDOTq8-_c4DChHL"
   }
 };

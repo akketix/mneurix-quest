@@ -147,7 +147,7 @@ a:hover {
   color: var(--cyan);
 }
 
-/* Cookie Banner (Matching mneurix.dev) */
+/* Cookie Banner (Matching mneurix.dev with strict hidden override) */
 .cookie-banner {
   position: fixed;
   bottom: 20px;
@@ -164,6 +164,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.cookie-banner[hidden], .cookie-banner.hidden {
+  display: none !important;
 }
 
 .cb-text {

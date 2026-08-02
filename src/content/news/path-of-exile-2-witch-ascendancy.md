@@ -7,7 +7,7 @@ genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "Early Access Q4 2026"
 heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "dZ023S-7jGk"
 impactScore: 10
 sourceUrl: "https://pathofexile2.com/"
 summary: "Grinding Gear Games breaks down the decoupled skill gem socketing engine, WASD movement integration, and 100+ unique boss encounter animations."

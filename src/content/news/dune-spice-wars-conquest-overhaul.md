@@ -7,7 +7,7 @@ genre: "RTS"
 platforms: ["PC", "Xbox Series X|S"]
 releaseWindow: "Available Now"
 heroImage: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "gE8yL4e9h20"
 impactScore: 8
 sourceUrl: "https://dunespicewars.com/"
 summary: "Shiro Games updates real-time 4X strategy Dune: Spice Wars with legendary hero units, Landsraad political favors, and Conquest mode modifiers."

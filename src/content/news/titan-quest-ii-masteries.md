@@ -7,7 +7,7 @@ genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "Early Access Q4 2026"
 heroImage: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "9rV3H5k8j90"
 impactScore: 8
 sourceUrl: "https://titanquest2.thqnordic.com/"
 summary: "Grimlore Games breaks down mythological Greek settings, dual-mastery class creation, and loot itemization for Titan Quest II."

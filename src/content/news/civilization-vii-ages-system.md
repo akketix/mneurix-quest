@@ -7,7 +7,7 @@ genre: "RTS"
 platforms: ["PC", "PS5", "Xbox Series X|S", "Nintendo Switch"]
 releaseWindow: "February 11, 2026"
 heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "tc3R_G2x0Q8"
 impactScore: 10
 sourceUrl: "https://civilization.2k.com/"
 summary: "Firaxis Games reveals the Antiquity, Exploration, and Modern Ages structure, decoupling leaders from specific historical civilizations."

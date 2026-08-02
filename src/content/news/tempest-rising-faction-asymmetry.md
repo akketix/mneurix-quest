@@ -7,7 +7,7 @@ genre: "RTS"
 platforms: ["PC"]
 releaseWindow: "Q4 2026"
 heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "1-hA5T6lY7s"
 impactScore: 8
 sourceUrl: "https://store.steampowered.com/app/1486920/Tempest_Rising/"
 summary: "3D Realms details macro resource refineries, harvest mechanics, and distinct sub-faction tech trees for Tempest Rising."

@@ -7,7 +7,7 @@ genre: "RTS"
 platforms: ["PC"]
 releaseWindow: "Early Access Available"
 heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "2M3S8A5W2B0"
 impactScore: 9
 sourceUrl: "https://playstormgate.com/"
 summary: "Frost Giant Studios reveals core macro mechanics for the Celestial faction alongside server-side deterministic tick rates and custom sub-faction tech trees."

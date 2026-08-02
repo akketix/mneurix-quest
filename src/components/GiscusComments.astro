@@ -1,4 +1,6 @@
 ---
+import { SITE_CONFIG } from '../config';
+
 export interface Props {
   repo?: string;
   repoId?: string;
@@ -7,10 +9,10 @@ export interface Props {
 }
 
 const {
-  repo = "your-github-username/mneurix-discussions",
-  repoId = "R_kgDO...",
-  category = "Announcements",
-  categoryId = "DIC_kwDO..."
+  repo = SITE_CONFIG.giscus.repo,
+  repoId = SITE_CONFIG.giscus.repoId,
+  category = SITE_CONFIG.giscus.category,
+  categoryId = SITE_CONFIG.giscus.categoryId
 } = Astro.props;
 ---
 
@@ -19,7 +21,7 @@ const {
     // GAMER DISCUSSIONS & COMMUNITY REACTIONS
   </div>
   
-  <div class="giscus-wrapper" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px;">
+  <div class="giscus-wrapper" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; min-height: 200px;">
     <script 
       is:inline
       src="https://giscus.app/client.js"

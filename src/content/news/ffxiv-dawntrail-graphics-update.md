@@ -7,7 +7,7 @@ genre: "MMO"
 platforms: ["PC", "PS5", "PS4", "Xbox Series X|S"]
 releaseWindow: "Available Now"
 heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "a56Y-9xW9q4"
 impactScore: 9
 sourceUrl: "https://na.finalfantasyxiv.com/dawntrail/"
 summary: "Square Enix details high-resolution texture pipelines, dual-dye armor channels, and Savage raid gear progression in FFXIV Dawntrail."

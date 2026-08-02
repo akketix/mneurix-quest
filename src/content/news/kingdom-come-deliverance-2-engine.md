@@ -7,7 +7,7 @@ genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "February 11, 2026"
 heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "s8655r13s4Y"
 impactScore: 9
 sourceUrl: "https://www.kingdomcomerpg.com/"
 summary: "Warhorse Studios outlines expanded 15th-century Bohemia map size, crossbow mechanics, gunpowder weaponry, and CryEngine physics improvements."

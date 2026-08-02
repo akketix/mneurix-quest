@@ -7,7 +7,7 @@ genre: "MMO"
 platforms: ["PC"]
 releaseWindow: "Alpha 2 Phase 2026"
 heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "dQw4w9WgXcQ"
+trailerId: "H4y5m1k2z3w"
 impactScore: 9
 sourceUrl: "https://ashesofcreation.com/"
 summary: "Intrepid Studios outlines server mesh networking, dynamic node siege mechanics, and naval trade routes for Ashes of Creation Alpha 2."

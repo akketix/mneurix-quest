@@ -98,8 +98,8 @@ const adsenseClient = SITE_CONFIG.adsense.client;
           s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + CLIENT;
           document.head.appendChild(s);
         }
-        function show() { var b = document.getElementById("cookie-banner"); if (b) b.hidden = false; }
-        function hide() { var b = document.getElementById("cookie-banner"); if (b) b.hidden = true; }
+        function show() { var b = document.getElementById("cookie-banner"); if (b) { b.removeAttribute("hidden"); b.classList.remove("hidden"); b.style.display = "flex"; } }
+        function hide() { var b = document.getElementById("cookie-banner"); if (b) { b.setAttribute("hidden", ""); b.classList.add("hidden"); b.style.display = "none"; } }
 
         var gpc = (typeof navigator !== "undefined" && navigator.globalPrivacyControl === true);
         if (gpc) {
@@ -112,6 +112,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         var fresh = c && (Date.now() - c.t < MAX_AGE_DAYS * 86400000);
         if (c && fresh) {
           if (c.v === "accepted") injectAds();
+          hide();
         } else {
           show();
         }
