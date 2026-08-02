@@ -30,6 +30,9 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="8qSn3ZVLnlt40LCcJiCCHc05pU7UPnyM2DOsf5pEZC4" />
 
+    <!-- Google AdSense Account Meta Tag -->
+    <meta name="google-adsense-account" content="ca-pub-4548561758943925" />
+
     <!-- Google AdSense Site Verification & Ad Script -->
     <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossorigin="anonymous"></script>
 
@@ -46,8 +49,6 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
-    <!-- AdSense Meta Tag -->
-    <meta name="google-adsense-account" content={adsenseClient} />
     <link rel="alternate" type="application/rss+xml" title={`${SITE_CONFIG.name} RSS Feed`} href="/rss.xml" />
     <meta name="theme-color" content="#0a0d12" />
 
