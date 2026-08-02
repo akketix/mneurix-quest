@@ -6,7 +6,7 @@ developer: "Shiro Games / Funcom"
 genre: "RTS"
 platforms: ["PC", "Xbox Series X|S"]
 releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1547234935-80c7145ec969?q=80&w=1200&auto=format&fit=crop"
 trailerId: "gE8yL4e9h20"
 impactScore: 8
 sourceUrl: "https://dunespicewars.com/"
