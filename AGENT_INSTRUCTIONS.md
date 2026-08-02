@@ -14,7 +14,7 @@ This guide defines the explicit operational rules, schemas, and workflow for aut
 
 ## 2. Strict Content Schema (Astro Frontmatter)
 
-Every generated article file MUST be placed in `site/src/content/news/{slug}.md` and MUST adhere to this exact YAML frontmatter structure:
+Every generated article file MUST be placed in `src/content/news/{slug}.md` and MUST adhere to this exact YAML frontmatter structure:
 
 ```yaml
 ---
@@ -53,11 +53,6 @@ Agents generating content **MUST NOT** include any of the following cliché term
 - ❌ `revolutionize` / `groundbreaking`
 - ❌ `seamlessly` / `breathtaking`
 
-### Writing Style Guidelines:
-1. Use direct, technical, objective journalistic language.
-2. Structure prose with clear `## H2` headings (e.g., `## Core Mechanical Overhaul`, `## System Specs & Infrastructure`).
-3. Keep total word count between **250 and 450 words**.
-
 ---
 
 ## 4. Execution Commands
@@ -74,7 +69,6 @@ python pipeline/run_pipeline.py --provider ollama
 
 ### Build & Validate Site HTML locally
 ```bash
-cd site
 npm run build
 ```
 
@@ -85,8 +79,8 @@ npm run build
 When a new article passes validation, publish it to Git:
 
 ```bash
-git add site/src/content/news/
+git add src/content/news/
 git commit -m "feat(news): add new intelligence report for [GameTitle]"
 git push origin main
 ```
-*DigitalOcean App Platform / GitHub Actions will auto-detect the push and deploy to `mneurix.quest`.*
+*DigitalOcean App Platform auto-detects the push and deploys to `mneurix.quest`.*

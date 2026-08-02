@@ -8,7 +8,6 @@ services:
       repo: akketix/mneurix-quest
       branch: main
       deploy_on_push: true
-    source_dir: site
     environment_slug: node-js
     instance_size_slug: basic-xxs
     instance_count: 1

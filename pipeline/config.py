@@ -9,7 +9,7 @@ from pathlib import Path
 # Base Paths
 PIPELINE_DIR = Path(__file__).parent.resolve()
 BASE_DIR = PIPELINE_DIR.parent
-SITE_NEWS_DIR = BASE_DIR / "site" / "src" / "content" / "news"
+SITE_NEWS_DIR = BASE_DIR / "src" / "content" / "news"
 
 # Target Domain
 TARGET_DOMAIN = "https://mneurix.quest"
