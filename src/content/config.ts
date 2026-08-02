@@ -7,7 +7,7 @@ const newsCollection = defineCollection({
     date: z.string().or(z.date()),
     gameTitle: z.string(),
     developer: z.string(),
-    genre: z.enum(['RTS', 'MMO', 'RPG']),
+    genre: z.enum(['RTS', 'MMO', 'RPG', 'HARDWARE']),
     platforms: z.array(z.string()),
     releaseWindow: z.string(),
     heroImage: z.string(),

@@ -25,7 +25,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="MNEURIX, mneurix.quest, gaming news, RTS, MMO, RPG, Path of Exile 2, Stormgate, World of Warcraft, autonomous journalism" />
+    <meta name="keywords" content="MNEURIX, mneurix.quest, gaming news, RTS, MMO, RPG, HARDWARE, DDR5 RAM, 3D V-Cache, CPUs, GPU specs" />
     
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
@@ -169,6 +169,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         <a href="/genre/rts" class={pathname.includes('/rts') ? 'active' : ''}>RTS</a>
         <a href="/genre/mmo" class={pathname.includes('/mmo') ? 'active' : ''}>MMO</a>
         <a href="/genre/rpg" class={pathname.includes('/rpg') ? 'active' : ''}>RPG</a>
+        <a href="/genre/hardware" class={pathname.includes('/hardware') ? 'active' : ''}>HARDWARE</a>
         <a href="/tools/specs-calculator" class={pathname.includes('/tools') ? 'active' : ''}>TOOLS</a>
         <a href="/rss.xml" target="_blank">RSS ↗</a>
       </nav>
@@ -187,7 +188,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
             <div>
               <div class="foot-label">STAY IN THE LOOP</div>
               <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
-                Get weekly curated RTS, MMO, and RPG intelligence digests directly to your inbox. Zero spam.
+                Get weekly curated RTS, MMO, RPG & Hardware intelligence digests directly to your inbox. Zero spam.
               </p>
             </div>
 
@@ -247,6 +248,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
               <li><a href="/genre/rts">RTS Intelligence</a></li>
               <li><a href="/genre/mmo">MMO Radar</a></li>
               <li><a href="/genre/rpg">RPG Devlogs</a></li>
+              <li><a href="/genre/hardware">Gaming Hardware & Silicon</a></li>
             </ul>
           </div>
           <div>
