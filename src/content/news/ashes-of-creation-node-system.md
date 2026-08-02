@@ -6,7 +6,7 @@ developer: "Intrepid Studios"
 genre: "MMO"
 platforms: ["PC"]
 releaseWindow: "Alpha 2 Phase 2026"
-heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop"
 trailerId: "H4y5m1k2z3w"
 impactScore: 9
 sourceUrl: "https://ashesofcreation.com/"

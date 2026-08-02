@@ -6,7 +6,7 @@ developer: "ArenaNet / NCSOFT"
 genre: "MMO"
 platforms: ["PC"]
 releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop"
 trailerId: "z_E3mF8w6q4"
 impactScore: 8
 sourceUrl: "https://www.guildwars2.com/"

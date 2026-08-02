@@ -6,7 +6,7 @@ developer: "Grimlore Games / THQ Nordic"
 genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "Early Access Q4 2026"
-heroImage: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1200&auto=format&fit=crop"
 trailerId: "9rV3H5k8j90"
 impactScore: 8
 sourceUrl: "https://titanquest2.thqnordic.com/"

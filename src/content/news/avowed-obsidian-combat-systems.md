@@ -6,7 +6,7 @@ developer: "Obsidian Entertainment / Xbox Game Studios"
 genre: "RPG"
 platforms: ["PC", "Xbox Series X|S"]
 releaseWindow: "February 18, 2026"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop"
 trailerId: "cZ5xX7R6m8Q"
 impactScore: 9
 sourceUrl: "https://avowed.obsidian.net/"

@@ -6,7 +6,7 @@ developer: "ZeniMax Online Studios / Bethesda"
 genre: "MMO"
 platforms: ["PC", "PS5", "PS4", "Xbox Series X|S", "Xbox One"]
 releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=1200&auto=format&fit=crop"
 trailerId: "z5xX7R6m8Q1"
 impactScore: 8
 sourceUrl: "https://www.elderscrollsonline.com/"

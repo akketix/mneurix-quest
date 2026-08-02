@@ -6,7 +6,7 @@ developer: "Warhorse Studios / Deep Silver"
 genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "February 11, 2026"
-heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=1200&auto=format&fit=crop"
 trailerId: "s8655r13s4Y"
 impactScore: 9
 sourceUrl: "https://www.kingdomcomerpg.com/"

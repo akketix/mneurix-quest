@@ -6,7 +6,7 @@ developer: "Frost Giant Studios"
 genre: "RTS"
 platforms: ["PC"]
 releaseWindow: "Early Access Available"
-heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop"
 trailerId: "2M3S8A5W2B0"
 impactScore: 9
 sourceUrl: "https://playstormgate.com/"

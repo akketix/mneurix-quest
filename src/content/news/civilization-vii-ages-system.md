@@ -6,7 +6,7 @@ developer: "Firaxis Games / 2K"
 genre: "RTS"
 platforms: ["PC", "PS5", "Xbox Series X|S", "Nintendo Switch"]
 releaseWindow: "February 11, 2026"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=1200&auto=format&fit=crop"
 trailerId: "tc3R_G2x0Q8"
 impactScore: 10
 sourceUrl: "https://civilization.2k.com/"

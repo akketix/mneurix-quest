@@ -6,7 +6,7 @@ developer: "Grinding Gear Games"
 genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "Early Access Q4 2026"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop"
 trailerId: "dZ023S-7jGk"
 impactScore: 10
 sourceUrl: "https://pathofexile2.com/"

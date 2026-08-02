@@ -6,7 +6,7 @@ developer: "Digital Extremes"
 genre: "MMO"
 platforms: ["PC"]
 releaseWindow: "Preludes Alpha 2026"
-heroImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop"
 trailerId: "p1v5X3z7A9K"
 impactScore: 9
 sourceUrl: "https://www.soulframe.com/"

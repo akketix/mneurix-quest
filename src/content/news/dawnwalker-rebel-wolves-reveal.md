@@ -6,7 +6,7 @@ developer: "Rebel Wolves / Bandai Namco"
 genre: "RPG"
 platforms: ["PC", "PS5", "Xbox Series X|S"]
 releaseWindow: "2026 Target"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=1200&auto=format&fit=crop"
 trailerId: "w7X8V9Y2Z3A"
 impactScore: 9
 sourceUrl: "https://rebel-wolves.com/"

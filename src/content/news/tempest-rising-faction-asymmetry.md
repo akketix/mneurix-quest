@@ -6,7 +6,7 @@ developer: "3D Realms / Slipgate Ironworks"
 genre: "RTS"
 platforms: ["PC"]
 releaseWindow: "Q4 2026"
-heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop"
 trailerId: "1-hA5T6lY7s"
 impactScore: 8
 sourceUrl: "https://store.steampowered.com/app/1486920/Tempest_Rising/"

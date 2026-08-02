@@ -6,7 +6,7 @@ developer: "Square Enix"
 genre: "MMO"
 platforms: ["PC", "PS5", "PS4", "Xbox Series X|S"]
 releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
 trailerId: "a56Y-9xW9q4"
 impactScore: 9
 sourceUrl: "https://na.finalfantasyxiv.com/dawntrail/"
