@@ -1,19 +1,24 @@
 ---
-title: "Chinese DRAM Expansion & CXMT DDR5: When PC Gamers Can Expect Cheaper, Faster RAM"
-date: "2026-08-02"
-gameTitle: "DDR5 Memory Technology"
-developer: "CXMT / SK Hynix / Micron / Samsung"
-genre: "HARDWARE"
-platforms: ["PC"]
-releaseWindow: "Market Update 2026"
-heroImage: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop"
+title: 'Chinese DRAM Expansion & CXMT DDR5: When PC Gamers Can Expect Cheaper, Faster
+  RAM'
+date: '2026-08-02'
+gameTitle: DDR5 Memory Technology
+developer: CXMT / SK Hynix / Micron / Samsung
+genre: HARDWARE
+platforms:
+- PC
+releaseWindow: Market Update 2026
+heroImage: /covers/china-dram-cxmt-ddr5-ram-pricing-innovations.png
 impactScore: 9
-sourceUrl: "https://mneurix.quest/genre/hardware"
-summary: "ChangXin Memory Technologies (CXMT) accelerates DDR5 volume production, driving down consumer memory costs while ushering in DDR5-8000+ speeds and CUDIMM/CAMM2 form factors for gaming PCs."
+sourceUrl: https://mneurix.quest/genre/hardware
+summary: ChangXin Memory Technologies (CXMT) accelerates DDR5 volume production, driving
+  down consumer memory costs while ushering in DDR5-8000+ speeds and CUDIMM/CAMM2
+  form factors for gaming PCs.
 specs:
-  minimum: "DDR5-5600 16 GB (2x8GB) Dual Channel"
-  recommended: "DDR5-7200+ 32 GB (2x16GB) Low Latency CUDIMM"
+  minimum: DDR5-5600 16 GB (2x8GB) Dual Channel
+  recommended: DDR5-7200+ 32 GB (2x16GB) Low Latency CUDIMM
 ---
+
 
 The global PC gaming memory market is undergoing its most significant structural shift since the introduction of DDR5. ChangXin Memory Technologies (CXMT), China's premier domestic DRAM manufacturer, has scaled volume production of 17nm and 18nm DDR5 silicon wafers, introducing substantial market competition to the incumbent trio of Samsung, SK Hynix, and Micron.
 

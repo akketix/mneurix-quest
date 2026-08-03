@@ -1,20 +1,23 @@
 ---
-title: "Guild Wars 2: Janthir Wilds Details Spear Proficiency & Homestead Housing Systems"
-date: "2026-07-26"
-gameTitle: "Guild Wars 2: Janthir Wilds"
-developer: "ArenaNet / NCSOFT"
-genre: "MMO"
-platforms: ["PC"]
-releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop"
-trailerId: "z_E3mF8w6q4"
+title: 'Guild Wars 2: Janthir Wilds Details Spear Proficiency & Homestead Housing
+  Systems'
+date: '2026-07-26'
+gameTitle: 'Guild Wars 2: Janthir Wilds'
+developer: ArenaNet / NCSOFT
+genre: MMO
+platforms:
+- PC
+releaseWindow: Available Now
+heroImage: /covers/guild-wars-2-janthir-wilds.png
 impactScore: 8
-sourceUrl: "https://www.guildwars2.com/"
-summary: "ArenaNet details land spear combat animations across all nine professions, customizable Homestead housing instances, and Warclaw mount mechanics."
+sourceUrl: https://www.guildwars2.com/
+summary: ArenaNet details land spear combat animations across all nine professions,
+  customizable Homestead housing instances, and Warclaw mount mechanics.
 specs:
-  minimum: "Intel Core i3-3220 / AMD FX-4300, 8 GB RAM, NVIDIA GTX 680"
-  recommended: "Intel Core i7-6700K / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1080"
+  minimum: Intel Core i3-3220 / AMD FX-4300, 8 GB RAM, NVIDIA GTX 680
+  recommended: Intel Core i7-6700K / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1080
 ---
+
 
 ArenaNet has published comprehensive operational notes for *Guild Wars 2: Janthir Wilds*, introducing terrestrial Spear weapons to all 9 core professions along with account-wide Homestead housing customization.
 

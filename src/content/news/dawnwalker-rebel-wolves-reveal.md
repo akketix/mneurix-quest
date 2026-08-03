@@ -1,20 +1,25 @@
 ---
-title: "Rebel Wolves Outlines Dawnwalker Dark Fantasy RPG Engine & Narrative Tech"
-date: "2026-07-27"
-gameTitle: "Dawnwalker"
-developer: "Rebel Wolves / Bandai Namco"
-genre: "RPG"
-platforms: ["PC", "PS5", "Xbox Series X|S"]
-releaseWindow: "2026 Target"
-heroImage: "https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=1200&auto=format&fit=crop"
-trailerId: "w7X8V9Y2Z3A"
+title: Rebel Wolves Outlines Dawnwalker Dark Fantasy RPG Engine & Narrative Tech
+date: '2026-07-27'
+gameTitle: Dawnwalker
+developer: Rebel Wolves / Bandai Namco
+genre: RPG
+platforms:
+- PC
+- PS5
+- Xbox Series X|S
+releaseWindow: 2026 Target
+heroImage: /covers/dawnwalker-rebel-wolves-reveal.png
 impactScore: 9
-sourceUrl: "https://rebel-wolves.com/"
-summary: "Former Witcher 3 developers at Rebel Wolves reveal Unreal Engine 5 narrative architecture and dark fantasy world systems for Dawnwalker."
+sourceUrl: https://rebel-wolves.com/
+summary: Former Witcher 3 developers at Rebel Wolves reveal Unreal Engine 5 narrative
+  architecture and dark fantasy world systems for Dawnwalker.
 specs:
-  minimum: "Intel Core i5-10400F / AMD Ryzen 5 3600, 16 GB RAM, NVIDIA RTX 2070"
-  recommended: "Intel Core i7-13700K / AMD Ryzen 7 7800X3D, 32 GB RAM, NVIDIA RTX 4070 Ti"
+  minimum: Intel Core i5-10400F / AMD Ryzen 5 3600, 16 GB RAM, NVIDIA RTX 2070
+  recommended: Intel Core i7-13700K / AMD Ryzen 7 7800X3D, 32 GB RAM, NVIDIA RTX 4070
+    Ti
 ---
+
 
 Rebel Wolves (founded by former *The Witcher 3* game director Konrad Tomaszkiewicz) and publisher Bandai Namco have detailed preliminary technical goals for *Dawnwalker*, a AAA dark fantasy narrative RPG built on Unreal Engine 5.
 

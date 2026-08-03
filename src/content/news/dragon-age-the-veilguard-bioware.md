@@ -1,20 +1,25 @@
 ---
-title: "BioWare Details Dragon Age: The Veilguard Frostbite Hair Strand Tech & Ability Wheels"
-date: "2026-07-31"
-gameTitle: "Dragon Age: The Veilguard"
-developer: "BioWare / Electronic Arts"
-genre: "RPG"
-platforms: ["PC", "PS5", "Xbox Series X|S"]
-releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop"
-trailerId: "cZ5xX7R6m8Q"
+title: 'BioWare Details Dragon Age: The Veilguard Frostbite Hair Strand Tech & Ability
+  Wheels'
+date: '2026-07-31'
+gameTitle: 'Dragon Age: The Veilguard'
+developer: BioWare / Electronic Arts
+genre: RPG
+platforms:
+- PC
+- PS5
+- Xbox Series X|S
+releaseWindow: Available Now
+heroImage: /covers/dragon-age-the-veilguard-bioware.png
 impactScore: 9
-sourceUrl: "https://www.ea.com/games/dragon-age/dragon-age-the-veilguard"
-summary: "BioWare outlines Frostbite engine strand hair simulation, tactical pause-and-play ability wheels, and PC ultrawide ray tracing support."
+sourceUrl: https://www.ea.com/games/dragon-age/dragon-age-the-veilguard
+summary: BioWare outlines Frostbite engine strand hair simulation, tactical pause-and-play
+  ability wheels, and PC ultrawide ray tracing support.
 specs:
-  minimum: "Intel Core i5-8400 / AMD Ryzen 3 3300X, 16 GB RAM, NVIDIA GTX 1650"
-  recommended: "Intel Core i7-12700K / AMD Ryzen 7 5700X, 16 GB RAM, NVIDIA RTX 3070"
+  minimum: Intel Core i5-8400 / AMD Ryzen 3 3300X, 16 GB RAM, NVIDIA GTX 1650
+  recommended: Intel Core i7-12700K / AMD Ryzen 7 5700X, 16 GB RAM, NVIDIA RTX 3070
 ---
+
 
 BioWare and Electronic Arts have published a deep technical breakdown for *Dragon Age: The Veilguard*, showcasing engine optimizations, combat mechanics, and PC graphical features built on an updated Frostbite engine branch.
 

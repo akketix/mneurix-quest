@@ -1,20 +1,24 @@
 ---
-title: "Capcom Details Monster Hunter Wilds RE Engine Weather & Herd Mechanics"
-date: "2026-08-02"
-gameTitle: "Monster Hunter Wilds"
-developer: "Capcom"
-genre: "RPG"
-platforms: ["PC", "PS5", "Xbox Series X|S"]
-releaseWindow: "February 28, 2026"
-heroImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop"
-trailerId: "w7X8V9Y2Z3A"
+title: Capcom Details Monster Hunter Wilds RE Engine Weather & Herd Mechanics
+date: '2026-08-02'
+gameTitle: Monster Hunter Wilds
+developer: Capcom
+genre: RPG
+platforms:
+- PC
+- PS5
+- Xbox Series X|S
+releaseWindow: February 28, 2026
+heroImage: /covers/monster-hunter-wilds-capcom-engine.png
 impactScore: 10
-sourceUrl: "https://www.monsterhunter.com/wilds/"
-summary: "Capcom outlines RE Engine weather transitions, dynamic monster herd AI, and Focus Mode aiming mechanics for Monster Hunter Wilds."
+sourceUrl: https://www.monsterhunter.com/wilds/
+summary: Capcom outlines RE Engine weather transitions, dynamic monster herd AI, and
+  Focus Mode aiming mechanics for Monster Hunter Wilds.
 specs:
-  minimum: "Intel Core i5-10600K / AMD Ryzen 5 3600, 16 GB RAM, NVIDIA GTX 1660 Super"
-  recommended: "Intel Core i7-12700K / AMD Ryzen 7 5700X3D, 16 GB RAM, NVIDIA RTX 4070"
+  minimum: Intel Core i5-10600K / AMD Ryzen 5 3600, 16 GB RAM, NVIDIA GTX 1660 Super
+  recommended: Intel Core i7-12700K / AMD Ryzen 7 5700X3D, 16 GB RAM, NVIDIA RTX 4070
 ---
+
 
 Capcom has released technical developer notes for *Monster Hunter Wilds*, detailing major upgrades to the RE Engine designed to support dense animal herd behaviors and real-time environmental climate cycles.
 

@@ -1,20 +1,25 @@
 ---
-title: "Final Fantasy XIV: Dawntrail Outlines 7.0 Graphics Engine & Raid Itemization"
-date: "2026-07-24"
-gameTitle: "Final Fantasy XIV: Dawntrail"
-developer: "Square Enix"
-genre: "MMO"
-platforms: ["PC", "PS5", "PS4", "Xbox Series X|S"]
-releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "a56Y-9xW9q4"
+title: 'Final Fantasy XIV: Dawntrail Outlines 7.0 Graphics Engine & Raid Itemization'
+date: '2026-07-24'
+gameTitle: 'Final Fantasy XIV: Dawntrail'
+developer: Square Enix
+genre: MMO
+platforms:
+- PC
+- PS5
+- PS4
+- Xbox Series X|S
+releaseWindow: Available Now
+heroImage: /covers/ffxiv-dawntrail-graphics-update.png
 impactScore: 9
-sourceUrl: "https://na.finalfantasyxiv.com/dawntrail/"
-summary: "Square Enix details high-resolution texture pipelines, dual-dye armor channels, and Savage raid gear progression in FFXIV Dawntrail."
+sourceUrl: https://na.finalfantasyxiv.com/dawntrail/
+summary: Square Enix details high-resolution texture pipelines, dual-dye armor channels,
+  and Savage raid gear progression in FFXIV Dawntrail.
 specs:
-  minimum: "Intel Core i7-7700 / AMD Ryzen 5 1600, 8 GB RAM, NVIDIA GTX 970"
-  recommended: "Intel Core i7-9700 / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2060"
+  minimum: Intel Core i7-7700 / AMD Ryzen 5 1600, 8 GB RAM, NVIDIA GTX 970
+  recommended: Intel Core i7-9700 / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2060
 ---
+
 
 Square Enix and Producer Naoki Yoshida have published full patch technical documentation for *Final Fantasy XIV: Dawntrail*, detailing the MMO's first major graphics engine overhaul alongside new job specializations (Viper and Pictomancer).
 

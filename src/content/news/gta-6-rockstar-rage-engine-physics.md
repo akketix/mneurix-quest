@@ -1,20 +1,25 @@
 ---
-title: "Rockstar Games Outlines RAGE Engine Physics & AI Water Simulation"
-date: "2026-08-01"
-gameTitle: "Grand Theft Auto VI"
-developer: "Rockstar Games / Take-Two Interactive"
-genre: "RPG"
-platforms: ["PS5", "Xbox Series X|S", "PC"]
-releaseWindow: "Fall 2026 Target"
-heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
-trailerId: "QdBZY2fkU-0"
+title: Rockstar Games Outlines RAGE Engine Physics & AI Water Simulation
+date: '2026-08-01'
+gameTitle: Grand Theft Auto VI
+developer: Rockstar Games / Take-Two Interactive
+genre: RPG
+platforms:
+- PS5
+- Xbox Series X|S
+- PC
+releaseWindow: Fall 2026 Target
+heroImage: https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg
+trailerId: QdBZY2fkU-0
 impactScore: 10
-sourceUrl: "https://www.rockstargames.com/VI"
-summary: "Rockstar Games details RAGE 9 engine advancements, real-time procedural ocean water physics, NPC crowd memory, and Vice City weather physics."
+sourceUrl: https://www.rockstargames.com/VI
+summary: Rockstar Games details RAGE 9 engine advancements, real-time procedural ocean
+  water physics, NPC crowd memory, and Vice City weather physics.
 specs:
-  minimum: "Intel Core i7-10700K / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2070 Super"
-  recommended: "Intel Core i7-14700K / AMD Ryzen 7 7800X3D, 32 GB RAM, NVIDIA RTX 4080"
+  minimum: Intel Core i7-10700K / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2070 Super
+  recommended: Intel Core i7-14700K / AMD Ryzen 7 7800X3D, 32 GB RAM, NVIDIA RTX 4080
 ---
+
 
 Rockstar Games and Take-Two Interactive have shared high-level engineering targets for *Grand Theft Auto VI*, detailing the technical breakthroughs driving the proprietary RAGE 9 engine in the state of Leonida (Vice City).
 

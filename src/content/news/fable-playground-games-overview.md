@@ -1,20 +1,23 @@
 ---
-title: "Playground Games Details Fable Engine Tech & Albion World Systems"
-date: "2026-08-01"
-gameTitle: "Fable"
-developer: "Playground Games / Xbox Game Studios"
-genre: "RPG"
-platforms: ["PC", "Xbox Series X|S"]
-releaseWindow: "2026 Target"
-heroImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop"
-trailerId: "k1yS1Vz1G2o"
+title: Playground Games Details Fable Engine Tech & Albion World Systems
+date: '2026-08-01'
+gameTitle: Fable
+developer: Playground Games / Xbox Game Studios
+genre: RPG
+platforms:
+- PC
+- Xbox Series X|S
+releaseWindow: 2026 Target
+heroImage: /covers/fable-playground-games-overview.png
 impactScore: 10
-sourceUrl: "https://www.xbox.com/en-US/games/fable"
-summary: "Playground Games outlines custom open-world engine rendering, character reputation reactivity, and melee-magic combat integration for Fable."
+sourceUrl: https://www.xbox.com/en-US/games/fable
+summary: Playground Games outlines custom open-world engine rendering, character reputation
+  reactivity, and melee-magic combat integration for Fable.
 specs:
-  minimum: "Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA RTX 2070"
-  recommended: "Intel Core i7-12700K / AMD Ryzen 7 5800X3D, 32 GB RAM, NVIDIA RTX 4070"
+  minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA RTX 2070
+  recommended: Intel Core i7-12700K / AMD Ryzen 7 5800X3D, 32 GB RAM, NVIDIA RTX 4070
 ---
+
 
 Playground Games and Xbox Game Studios have published a technical architecture overview for *Fable*, detailing how the custom ForzaTech engine was expanded to support open-world action RPG combat, dense flora simulation, and NPC behavioral reactivity.
 

@@ -1,20 +1,26 @@
 ---
-title: "ZeniMax Online Details Elder Scrolls Online Scribing System & West Weald Region"
-date: "2026-07-28"
-gameTitle: "The Elder Scrolls Online: Gold Road"
-developer: "ZeniMax Online Studios / Bethesda"
-genre: "MMO"
-platforms: ["PC", "PS5", "PS4", "Xbox Series X|S", "Xbox One"]
-releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=1200&auto=format&fit=crop"
-trailerId: "z5xX7R6m8Q1"
+title: ZeniMax Online Details Elder Scrolls Online Scribing System & West Weald Region
+date: '2026-07-28'
+gameTitle: 'The Elder Scrolls Online: Gold Road'
+developer: ZeniMax Online Studios / Bethesda
+genre: MMO
+platforms:
+- PC
+- PS5
+- PS4
+- Xbox Series X|S
+- Xbox One
+releaseWindow: Available Now
+heroImage: /covers/elder-scrolls-online-gold-road.png
 impactScore: 8
-sourceUrl: "https://www.elderscrollsonline.com/"
-summary: "ZeniMax Online Studios outlines the Scribing skill customization system, West Weald zone architecture, and 12-player Lucent Citadel trial."
+sourceUrl: https://www.elderscrollsonline.com/
+summary: ZeniMax Online Studios outlines the Scribing skill customization system,
+  West Weald zone architecture, and 12-player Lucent Citadel trial.
 specs:
-  minimum: "Intel Core i5-2300 / AMD FX-4350, 8 GB RAM, NVIDIA GTX 750 Ti"
-  recommended: "Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060"
+  minimum: Intel Core i5-2300 / AMD FX-4350, 8 GB RAM, NVIDIA GTX 750 Ti
+  recommended: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060
 ---
+
 
 ZeniMax Online Studios has released full developer notes for *The Elder Scrolls Online: Gold Road*, introducing the Scribing system—a major customization engine allowing players to craft custom skill grimoires and alter spell effects.
 

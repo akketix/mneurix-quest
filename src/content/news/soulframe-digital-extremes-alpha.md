@@ -1,20 +1,22 @@
 ---
-title: "Digital Extremes Outlines Soulframe Preludes Alpha Combat & Pact Systems"
-date: "2026-07-29"
-gameTitle: "Soulframe"
-developer: "Digital Extremes"
-genre: "MMO"
-platforms: ["PC"]
-releaseWindow: "Preludes Alpha 2026"
-heroImage: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop"
-trailerId: "p1v5X3z7A9K"
+title: Digital Extremes Outlines Soulframe Preludes Alpha Combat & Pact Systems
+date: '2026-07-29'
+gameTitle: Soulframe
+developer: Digital Extremes
+genre: MMO
+platforms:
+- PC
+releaseWindow: Preludes Alpha 2026
+heroImage: /covers/soulframe-digital-extremes-alpha.png
 impactScore: 9
-sourceUrl: "https://www.soulframe.com/"
-summary: "Digital Extremes details tactical melee combat, ancestral Pact magic, and procedurally shifting dungeon networks for Soulframe."
+sourceUrl: https://www.soulframe.com/
+summary: Digital Extremes details tactical melee combat, ancestral Pact magic, and
+  procedurally shifting dungeon networks for Soulframe.
 specs:
-  minimum: "Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1070"
-  recommended: "Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3070"
+  minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1070
+  recommended: Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3070
 ---
+
 
 Digital Extremes (creators of *Warframe*) has published technical updates detailing the melee combat and ancestral Pact magic systems featured in the *Soulframe Preludes* testing phase. Built on the Evolution Engine, *Soulframe* emphasizes deliberate fantasy combat over high-speed ranged gunplay.
 

@@ -1,20 +1,23 @@
 ---
-title: "World's Edge Details Age of Mythology: Retold God Powers & Engine Redesign"
-date: "2026-07-26"
-gameTitle: "Age of Mythology: Retold"
-developer: "World's Edge / Xbox Game Studios"
-genre: "RTS"
-platforms: ["PC", "Xbox Series X|S"]
-releaseWindow: "Available Now"
-heroImage: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1200&auto=format&fit=crop"
-trailerId: "a9X8Y7Z6m5Q"
+title: 'World''s Edge Details Age of Mythology: Retold God Powers & Engine Redesign'
+date: '2026-07-26'
+gameTitle: 'Age of Mythology: Retold'
+developer: World's Edge / Xbox Game Studios
+genre: RTS
+platforms:
+- PC
+- Xbox Series X|S
+releaseWindow: Available Now
+heroImage: /covers/age-of-mythology-retold-rts.png
 impactScore: 9
-sourceUrl: "https://www.ageofempires.com/games/aom-retold/"
-summary: "World's Edge details reusable God Powers, myth unit balance, and modern 4K engine upgrades in Age of Mythology: Retold."
+sourceUrl: https://www.ageofempires.com/games/aom-retold/
+summary: 'World''s Edge details reusable God Powers, myth unit balance, and modern
+  4K engine upgrades in Age of Mythology: Retold.'
 specs:
-  minimum: "Intel Core i3-4130 / AMD FX-4350, 8 GB RAM, NVIDIA GTX 650"
-  recommended: "Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060"
+  minimum: Intel Core i3-4130 / AMD FX-4350, 8 GB RAM, NVIDIA GTX 650
+  recommended: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060
 ---
+
 
 World's Edge and Xbox Game Studios have published post-launch technical documentation for *Age of Mythology: Retold*, detailing how classic RTS mechanics were overhauled with modernized engine technology and balance updates.
 

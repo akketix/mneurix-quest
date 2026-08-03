@@ -1,19 +1,22 @@
 ---
-title: "PCIe 5.0 NVMe SSDs & DirectStorage 1.2: Texture Streaming & Load Time Benchmarks"
-date: "2026-07-30"
-gameTitle: "DirectStorage 1.2 Storage Architecture"
-developer: "Microsoft / Phison / Samsung / Western Digital"
-genre: "HARDWARE"
-platforms: ["PC"]
-releaseWindow: "Hardware Architecture Intel"
-heroImage: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1200&auto=format&fit=crop"
+title: 'PCIe 5.0 NVMe SSDs & DirectStorage 1.2: Texture Streaming & Load Time Benchmarks'
+date: '2026-07-30'
+gameTitle: DirectStorage 1.2 Storage Architecture
+developer: Microsoft / Phison / Samsung / Western Digital
+genre: HARDWARE
+platforms:
+- PC
+releaseWindow: Hardware Architecture Intel
+heroImage: /covers/pcie-5-ssds-directstorage-gaming-benchmarks.png
 impactScore: 9
-sourceUrl: "https://mneurix.quest/genre/hardware"
-summary: "Technical benchmarks evaluating PCIe 5.0 NVMe sequential read speeds (14,000 MB/s), GPU asset decompression, and DirectStorage 1.2 frame pacing."
+sourceUrl: https://mneurix.quest/genre/hardware
+summary: Technical benchmarks evaluating PCIe 5.0 NVMe sequential read speeds (14,000
+  MB/s), GPU asset decompression, and DirectStorage 1.2 frame pacing.
 specs:
-  minimum: "PCIe 3.0 NVMe SSD (3,500 MB/s Read Speed)"
-  recommended: "PCIe 5.0 NVMe SSD (14,000 MB/s Read Speed with Active Heatsink)"
+  minimum: PCIe 3.0 NVMe SSD (3,500 MB/s Read Speed)
+  recommended: PCIe 5.0 NVMe SSD (14,000 MB/s Read Speed with Active Heatsink)
 ---
+
 
 The era of mechanical hard drives and SATA SSDs in PC gaming is officially over. Modern open-world game engines rely on Microsoft DirectStorage 1.2 and PCIe 5.0 NVMe storage bandwidth to stream high-resolution textures directly from solid-state drives into GPU VRAM.
 

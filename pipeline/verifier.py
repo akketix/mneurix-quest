@@ -159,7 +159,8 @@ def find_banned_words(text: str, banned: list[str] = BANNED_WORDS) -> list[dict[
     """Return list of {word, count, first_line} for each banned phrase present."""
     hits = []
     for w in banned:
-        matches = re.findall(re.escape(w), text, flags=re.IGNORECASE)
+        pattern = r"\b" + re.escape(w) + r"\b"
+        matches = re.findall(pattern, text, flags=re.IGNORECASE)
         if matches:
             idx = text.lower().find(w.lower())
             line = text[:idx].count("\n") + 1 if idx >= 0 else 0
@@ -174,8 +175,9 @@ def replace_banned_words(text: str, banned: list[str] = BANNED_WORDS) -> tuple[s
         repl = BANNED_REPLACEMENTS.get(w)
         if repl is None:
             continue
-        if re.search(re.escape(w), text, flags=re.IGNORECASE):
-            text = re.sub(re.escape(w), repl, text, flags=re.IGNORECASE)
+        pattern = r"\b" + re.escape(w) + r"\b"
+        if re.search(pattern, text, flags=re.IGNORECASE):
+            text = re.sub(pattern, repl, text, flags=re.IGNORECASE)
             swapped.append(w)
     return text, swapped
 

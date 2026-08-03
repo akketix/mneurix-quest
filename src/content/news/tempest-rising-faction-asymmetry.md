@@ -1,20 +1,22 @@
 ---
-title: "Tempest Rising Details Global Defense Forces & Dynasty Faction Asymmetry"
-date: "2026-07-30"
-gameTitle: "Tempest Rising"
-developer: "3D Realms / Slipgate Ironworks"
-genre: "RTS"
-platforms: ["PC"]
-releaseWindow: "Q4 2026"
-heroImage: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop"
-trailerId: "1-hA5T6lY7s"
+title: Tempest Rising Details Global Defense Forces & Dynasty Faction Asymmetry
+date: '2026-07-30'
+gameTitle: Tempest Rising
+developer: 3D Realms / Slipgate Ironworks
+genre: RTS
+platforms:
+- PC
+releaseWindow: Q4 2026
+heroImage: https://cdn.cloudflare.steamstatic.com/steam/apps/1486920/header.jpg
 impactScore: 8
-sourceUrl: "https://store.steampowered.com/app/1486920/Tempest_Rising/"
-summary: "3D Realms details macro resource refineries, harvest mechanics, and distinct sub-faction tech trees for Tempest Rising."
+sourceUrl: https://store.steampowered.com/app/1486920/Tempest_Rising/
+summary: 3D Realms details macro resource refineries, harvest mechanics, and distinct
+  sub-faction tech trees for Tempest Rising.
 specs:
-  minimum: "Intel Core i5-6500 / AMD Ryzen 3 1200, 8 GB RAM, NVIDIA GTX 1060 (6GB)"
-  recommended: "Intel Core i7-10700K / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2070"
+  minimum: Intel Core i5-6500 / AMD Ryzen 3 1200, 8 GB RAM, NVIDIA GTX 1060 (6GB)
+  recommended: Intel Core i7-10700K / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2070
 ---
+
 
 Slipgate Ironworks and 3D Realms have published technical breakdown notes detailing the economic and combat asymmetry between the Global Defense Forces (GDF) and the Tempest Dynasty in *Tempest Rising*. Built on Unreal Engine 5, the game combines classic base-building mechanics with modern input queues and netcode.
 

@@ -20,3 +20,6 @@ dist/
 
 # runtime data store (waitlist subscriptions)
 data/
+
+# pipeline runtime state (dedup store, generated audit report)
+pipeline/runtime/

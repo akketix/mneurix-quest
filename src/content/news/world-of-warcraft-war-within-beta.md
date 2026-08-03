@@ -1,20 +1,23 @@
 ---
-title: "World of Warcraft: The War Within Expansion Outlines Delves & Warband Progression"
-date: "2026-08-02"
-gameTitle: "World of Warcraft: The War Within"
-developer: "Blizzard Entertainment"
-genre: "MMO"
-platforms: ["PC", "macOS"]
-releaseWindow: "Q3 2026"
-heroImage: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop"
-trailerId: "9R9lB_ZtH0A"
+title: 'World of Warcraft: The War Within Expansion Outlines Delves & Warband Progression'
+date: '2026-08-02'
+gameTitle: 'World of Warcraft: The War Within'
+developer: Blizzard Entertainment
+genre: MMO
+platforms:
+- PC
+- macOS
+releaseWindow: Q3 2026
+heroImage: /covers/world-of-warcraft-war-within-beta.png
 impactScore: 9
-sourceUrl: "https://worldofwarcraft.blizzard.com/"
-summary: "Blizzard details account-wide Warband progression, cross-realm guild features, and endgame Delve loot tables for World of Warcraft's tenth expansion."
+sourceUrl: https://worldofwarcraft.blizzard.com/
+summary: Blizzard details account-wide Warband progression, cross-realm guild features,
+  and endgame Delve loot tables for World of Warcraft's tenth expansion.
 specs:
-  minimum: "Intel Core i5-4670K / AMD FX-8350, 8 GB RAM, NVIDIA GTX 960 (4GB)"
-  recommended: "Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3060"
+  minimum: Intel Core i5-4670K / AMD FX-8350, 8 GB RAM, NVIDIA GTX 960 (4GB)
+  recommended: Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3060
 ---
+
 
 Blizzard Entertainment has published the final structural engineering notes for *The War Within* ahead of the global launch window. The update overhauls account progression via the Warband framework, allowing shared bank storage, reputation gains, and transmog collection across all characters on an account.
 
