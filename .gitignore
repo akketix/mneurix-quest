@@ -17,3 +17,6 @@ dist/
 .vscode/
 .idea/
 .DS_Store
+
+# runtime data store (waitlist subscriptions)
+data/
