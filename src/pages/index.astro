@@ -70,7 +70,7 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - ne
         // LIVE AGENTIC INTEL STREAM
       </div>
 
-      <div class="news-grid">
+      <div class="news-grid" id="intel-grid">
         {sortedPosts.map((post) => (
           <article class="news-card">
             <a href={`/news/${post.slug}`}>
@@ -95,6 +95,26 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - ne
           </article>
         ))}
       </div>
+
+      {sortedPosts.length > 9 && (
+        <>
+          <div style="text-align: center; margin: 24px 0 48px;">
+            <button id="load-more" class="btn primary" type="button">LOAD MORE INTEL ↓</button>
+          </div>
+          <script is:inline define:vars={{ total: sortedPosts.length }}>
+            (function(){
+              var grid = document.getElementById('intel-grid');
+              var btn = document.getElementById('load-more');
+              if (!grid || !btn) return;
+              var cards = grid.querySelectorAll('article.news-card');
+              var perPage = 9; var shown = perPage;
+              function apply(){ for (var i=0;i<cards.length;i++){ cards[i].style.display = i < shown ? '' : 'none'; } if (shown >= cards.length){ btn.style.display='none'; } }
+              apply();
+              btn.addEventListener('click', function(){ shown += perPage; apply(); });
+            })();
+          </script>
+        </>
+      )}
     </section>
 
     <!-- Interactive R&D Utility Section (Matching mneurix.dev) -->
