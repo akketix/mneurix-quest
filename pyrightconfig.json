@@ -1,0 +1,7 @@
+{
+  "extraPaths": ["pipeline"],
+  "include": ["pipeline"],
+  "exclude": ["node_modules", "dist", ".astro"],
+  "reportMissingImports": "error",
+  "reportGeneralTypeIssues": "warning"
+}
