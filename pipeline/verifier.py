@@ -49,7 +49,7 @@ BANNED_REPLACEMENTS: dict[str, str] = {
 
 
 # ---------------------------------------------------------------- quotes ----------
-_QUOTE_RE = re.compile(r"\u201c([^\u201d\n]{12,})\u201d|\"([^\"\n]{30,})\"")
+_QUOTE_RE = re.compile(r"\u201c([^\u201d\n]{12,})\u201d")
 
 
 def extract_quotes(body: str) -> list[str]:
@@ -81,7 +81,9 @@ def best_partial_ratio(needle: str, haystack: str) -> float:
     return round(best * 100, 1)
 
 
-def verify_quotes(quotes: list[str], source_text: str, threshold: float = QUOTE_GROUND_THRESHOLD) -> dict[str, Any]:
+def verify_quotes(
+    quotes: list[str], source_text: str, threshold: float = QUOTE_GROUND_THRESHOLD
+) -> dict[str, Any]:
     """Ground each quote against the source; return {grounded, ungrounded, pass}."""
     grounded, ungrounded = [], []
     for q in quotes:
@@ -108,7 +110,10 @@ Be rigorous. Do not invent evidence. If the SOURCE is empty, mark non-trivial cl
 def audit_claims(body: str, source_text: str, max_claims: int = 25) -> dict[str, Any]:
     """LLM audit of article claims against the source. Returns {claims, counts}."""
     if not body.strip():
-        return {"claims": [], "counts": {"supported": 0, "unsupported": 0, "contradicted": 0}}
+        return {
+            "claims": [],
+            "counts": {"supported": 0, "unsupported": 0, "contradicted": 0},
+        }
     user = f"ARTICLE:\n{body[:6000]}\n\nSOURCE:\n{source_text[:6000]}"
     data = ollama_json(user, system=_CLAIM_AUDIT_SYSTEM, timeout=180.0)
     claims = (data or {}).get("claims", []) if isinstance(data, dict) else []
@@ -125,7 +130,9 @@ def audit_claims(body: str, source_text: str, max_claims: int = 25) -> dict[str,
 _YT_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
 
 
-def validate_trailer_id(trailer_id: str, game_title: str | None = None, timeout: float = 10.0) -> dict[str, Any]:
+def validate_trailer_id(
+    trailer_id: str, game_title: str | None = None, timeout: float = 10.0
+) -> dict[str, Any]:
     """Validate a YouTube ID via oEmbed. Returns {valid, title, reason}."""
     tid = (trailer_id or "").strip()
     result: dict[str, Any] = {"valid": False, "title": "", "reason": "", "id": tid}
@@ -144,7 +151,9 @@ def validate_trailer_id(trailer_id: str, game_title: str | None = None, timeout:
             title = resp.json()["title"]
             result.update({"valid": True, "title": title})
             if game_title:
-                ratio = difflib.SequenceMatcher(None, game_title.lower(), title.lower()).ratio()
+                ratio = difflib.SequenceMatcher(
+                    None, game_title.lower(), title.lower()
+                ).ratio()
                 result["title_match"] = round(ratio, 2)
             return result
         result["reason"] = f"oEmbed HTTP {resp.status_code} — video unavailable/deleted"
@@ -155,7 +164,9 @@ def validate_trailer_id(trailer_id: str, game_title: str | None = None, timeout:
 
 
 # ---------------------------------------------------------------- banned words --
-def find_banned_words(text: str, banned: list[str] = BANNED_WORDS) -> list[dict[str, Any]]:
+def find_banned_words(
+    text: str, banned: list[str] = BANNED_WORDS
+) -> list[dict[str, Any]]:
     """Return list of {word, count, first_line} for each banned phrase present."""
     hits = []
     for w in banned:
@@ -168,7 +179,9 @@ def find_banned_words(text: str, banned: list[str] = BANNED_WORDS) -> list[dict[
     return hits
 
 
-def replace_banned_words(text: str, banned: list[str] = BANNED_WORDS) -> tuple[str, list[str]]:
+def replace_banned_words(
+    text: str, banned: list[str] = BANNED_WORDS
+) -> tuple[str, list[str]]:
     """Conservatively swap banned phrases for neutral alternatives. Returns (new_text, swapped)."""
     swapped = []
     for w in banned:
@@ -197,7 +210,11 @@ def entity_cross_check(facts: dict[str, Any], source_text: str) -> dict[str, Any
             report[k] = "missing"
             continue
         # Match on the first significant token to survive "Blackbird Interactive / Gearbox".
-        token = v.split("/")[0].strip().split()[0].lower() if v.split("/")[0].strip() else v.lower()
+        token = (
+            v.split("/")[0].strip().split()[0].lower()
+            if v.split("/")[0].strip()
+            else v.lower()
+        )
         report[k] = "present" if token and token in src else "absent"
     platforms = facts.get("platforms", [])
     report["platforms"] = [

@@ -47,6 +47,7 @@ def publish_article(
     impact_score: int,
     source_text: str = "",
     slug_override: str | None = None,
+    title: str | None = None,
     write: bool = True,
 ) -> Path | None:
     """Validate, gate, resolve thumbnail, and write the article. Returns path or None."""
@@ -85,7 +86,9 @@ def publish_article(
         logger.info(f"Auto-de-slopped banned words: {swapped}")
     leftover = find_banned_words(body)
     if leftover:
-        logger.warning(f"Banned words remain (manual review): {[h['word'] for h in leftover]}")
+        logger.warning(
+            f"Banned words remain (manual review): {[h['word'] for h in leftover]}"
+        )
 
     # 5. Quote grounding — HARD gate.
     quotes = extract_quotes(body)
@@ -105,22 +108,24 @@ def publish_article(
     SITE_NEWS_DIR.mkdir(parents=True, exist_ok=True)
     file_path = SITE_NEWS_DIR / f"{slug}.md"
     date_str = datetime.now().strftime("%Y-%m-%d")
+    article_title = title or (str(facts.get("headline") or "").strip()) or f"{game_title}: Official Update & Technical Overview"
     platforms = facts.get("platforms") or ["PC"]
-    summary = str(facts.get("keyFacts", [""])[:1][0] if facts.get("keyFacts") else "") or game_title
+    summary = (
+        str(facts.get("keyFacts", [""])[:1][0] if facts.get("keyFacts") else "")
+        or game_title
+    )
     min_spec = str(facts.get("minimumSpecs", "")).strip()
     rec_spec = str(facts.get("recommendedSpecs", "")).strip()
     specs_block = ""
     if min_spec or rec_spec:
         specs_block = (
-            "\nspecs:\n"
-            f'  minimum: "{min_spec}"\n'
-            f'  recommended: "{rec_spec}"\n'
+            f'\nspecs:\n  minimum: "{min_spec}"\n  recommended: "{rec_spec}"\n'
         )
     trailer_line = f'trailerId: "{trailer_id}"\n' if trailer_id else ""
 
     frontmatter = (
         "---\n"
-        f'title: "{game_title}: Official Update & Technical Overview"\n'
+        f'title: "{article_title}"\n'
         f'date: "{date_str}"\n'
         f'gameTitle: "{game_title}"\n'
         f'developer: "{str(facts.get("developer", "")).strip()}"\n'

@@ -35,6 +35,8 @@ Output strict JSON with these fields:
 - minimumSpecs: string ONLY if the source states minimum specs; else ""
 - recommendedSpecs: string ONLY if the source states recommended specs; else ""
 - keyFacts: array of 3 concise bullet strings, each grounded in the source
+- headline: a descriptive article title summarizing the news in this source
+  (not just the game name)
 - evidence: object mapping each of the fields above to a short verbatim span
   from the source that backs it (or null if the field was empty/unknown)
 
@@ -47,7 +49,7 @@ SYSTEM_EDITORIAL_WRITER = f"""You are an expert gaming journalist writing for MN
 Turn verified, grounded game facts into a concise, high-signal Markdown article.
 
 STRICT GUIDELINES:
-1. NEVER use these banned AI cliche words: {', '.join(BANNED_WORDS)}.
+1. NEVER use these banned AI cliche words: {", ".join(BANNED_WORDS)}.
 2. Write direct, objective, technical prose. No fluff or sensationalized praise.
 3. Use H2 headings (e.g. "## Core Mechanical Updates", "## Infrastructure & Balance").
 4. Keep the article 250-450 words.
@@ -69,6 +71,7 @@ class ExtractedFacts(BaseModel):
     minimumSpecs: str = ""
     recommendedSpecs: str = ""
     keyFacts: list[str] = Field(default_factory=list)
+    headline: str = ""
     evidence: dict[str, Any] = Field(default_factory=dict)
 
     @field_validator("genre")
@@ -99,24 +102,30 @@ def _mock_facts(raw_article: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def extract_facts(raw_article: dict[str, Any], provider: str = "mock", source_text: str = "") -> dict[str, Any]:
+def extract_facts(
+    raw_article: dict[str, Any], provider: str = "mock", source_text: str = ""
+) -> dict[str, Any]:
     """Extract structured, grounded facts from a raw article + its source text."""
     if provider != "ollama":
         return _mock_facts(raw_article)
 
     user = (
-        f"RSS TITLE:\n{raw_article.get('title','')}\n\n"
-        f"RSS SUMMARY:\n{raw_article.get('summary','')}\n\n"
+        f"RSS TITLE:\n{raw_article.get('title', '')}\n\n"
+        f"RSS SUMMARY:\n{raw_article.get('summary', '')}\n\n"
         f"SOURCE TEXT:\n{source_text[:8000]}"
     )
-    data = ollama_json(user, system=SYSTEM_FACT_EXTRACTOR, model=OLLAMA_MODEL, timeout=180.0)
+    data = ollama_json(
+        user, system=SYSTEM_FACT_EXTRACTOR, model=OLLAMA_MODEL, timeout=180.0
+    )
     if not isinstance(data, dict):
         logger.warning("Fact extraction returned no JSON; falling back to mock facts.")
         return _mock_facts(raw_article)
     try:
         validated = ExtractedFacts.model_validate(data)
     except Exception as e:
-        logger.warning(f"Fact extraction schema validation failed ({e}); using raw dict.")
+        logger.warning(
+            f"Fact extraction schema validation failed ({e}); using raw dict."
+        )
         validated = ExtractedFacts.model_validate({k: data.get(k, "") for k in data})
     facts = validated.model_dump()
     # Strip ungrounded optional fields: empty trailer/specs must stay empty.
@@ -129,10 +138,17 @@ def extract_facts(raw_article: dict[str, Any], provider: str = "mock", source_te
     return facts
 
 
-def generate_editorial_article(facts: dict[str, Any], raw_summary: str, provider: str = "mock", source_text: str = "") -> str:
+def generate_editorial_article(
+    facts: dict[str, Any],
+    raw_summary: str,
+    provider: str = "mock",
+    source_text: str = "",
+) -> str:
     """Generate MNEURIX-styled Markdown prose from grounded facts."""
     if provider != "ollama":
-        bullet_points = "\n".join([f"- **Update Focus**: {fact}" for fact in facts.get("keyFacts", [])])
+        bullet_points = "\n".join(
+            [f"- **Update Focus**: {fact}" for fact in facts.get("keyFacts", [])]
+        )
         return (
             f"{facts.get('developer', 'The developer')} has published new technical and operational "
             f"details regarding *{facts.get('gameTitle', 'the project')}*. The update outlines core "
@@ -153,9 +169,13 @@ def generate_editorial_article(facts: dict[str, Any], raw_summary: str, provider
     )
     from ollama_client import ollama_chat
 
-    body = ollama_chat(user, system=SYSTEM_EDITORIAL_WRITER, model=OLLAMA_MODEL, timeout=180.0)
+    body = ollama_chat(
+        user, system=SYSTEM_EDITORIAL_WRITER, model=OLLAMA_MODEL, timeout=180.0
+    )
     if not body or not body.strip():
-        logger.warning("Editorial generation returned empty; falling back to mock body.")
+        logger.warning(
+            "Editorial generation returned empty; falling back to mock body."
+        )
         return generate_editorial_article(facts, raw_summary, provider="mock")
     # Trim accidental code fences.
     text = body.strip()
