@@ -25,6 +25,14 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/favicon.svg" color="#5eead4" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={Astro.url.href} />
     <meta name="keywords" content="MNEURIX, mneurix.quest, gaming news, RTS, MMO, RPG, HARDWARE, DDR5 RAM, 3D V-Cache, CPUs, GPU specs" />
     
     <!-- Google Search Console Verification Tag -->
@@ -33,21 +41,21 @@ const adsenseClient = SITE_CONFIG.adsense.client;
     <!-- Google AdSense Account Meta Tag -->
     <meta name="google-adsense-account" content="ca-pub-4548561758943925" />
 
-    <!-- Google AdSense Site Verification & Ad Script -->
-    <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossorigin="anonymous"></script>
-
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:creator" content="@mneurix_quest" />
 
     <link rel="alternate" type="application/rss+xml" title={`${SITE_CONFIG.name} RSS Feed`} href="/rss.xml" />
     <meta name="theme-color" content="#0a0d12" />
@@ -98,6 +106,17 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         function show() { var b = document.getElementById("cookie-banner"); if (b) { b.removeAttribute("hidden"); b.classList.remove("hidden"); b.style.display = "flex"; } }
         function hide() { var b = document.getElementById("cookie-banner"); if (b) { b.setAttribute("hidden", ""); b.classList.add("hidden"); b.style.display = "none"; } }
 
+        var adsLoaded = false;
+        function loadAdsense() {
+          if (adsLoaded || !allowAds) return;
+          adsLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + CLIENT;
+          s.crossOrigin = "anonymous";
+          document.head.appendChild(s);
+        }
+
         var gpc = (typeof navigator !== "undefined" && navigator.globalPrivacyControl === true);
         if (gpc) {
           write("declined");
@@ -109,6 +128,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         var fresh = c && (Date.now() - c.t < MAX_AGE_DAYS * 86400000);
         if (c && fresh) {
           hide();
+          if (c.v === "accepted") { loadAdsense(); }
         } else {
           show();
         }
@@ -116,7 +136,7 @@ const adsenseClient = SITE_CONFIG.adsense.client;
         function wire() {
           var acc = document.getElementById("cb-accept");
           var dec = document.getElementById("cb-decline");
-          if (acc) acc.addEventListener("click", function () { write("accepted"); hide(); });
+          if (acc) acc.addEventListener("click", function () { write("accepted"); hide(); loadAdsense(); });
           if (dec) dec.addEventListener("click", function () { write("declined"); hide(); });
         }
         if (document.readyState === "loading") {
