@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 — Signal Lost — MNEURIX // QUEST">
+  <div class="container" style="max-width:720px;margin:0 auto;padding:80px 20px;text-align:center;">
+    <span style="font-family:var(--mono);color:var(--cyan);font-size:13px;letter-spacing:0.18em;text-transform:uppercase;">// SIGNAL LOST // 404</span>
+
+    <h1 style="font-size:48px;color:var(--text-heading);margin:20px 0 16px;line-height:1.1;">Target Not Found</h1>
+
+    <p style="color:var(--text-muted);max-width:520px;margin:0 auto 36px;font-size:15px;line-height:1.6;">
+      This intel vector returned empty. The page you're tracking has drifted off-radar or never existed in our feed.
+    </p>
+
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 36px;" aria-hidden="true">
+      <g fill="none" stroke="#5eead4" stroke-width="1.5">
+        <circle cx="60" cy="60" r="54" opacity="0.35" />
+        <circle cx="60" cy="60" r="38" opacity="0.55" />
+        <circle cx="60" cy="60" r="22" opacity="0.8" />
+        <line x1="6" y1="60" x2="114" y2="60" opacity="0.55" />
+        <line x1="60" y1="6" x2="60" y2="114" opacity="0.55" />
+        <line x1="22" y1="22" x2="36" y2="36" opacity="0.3" />
+        <line x1="98" y1="22" x2="84" y2="36" opacity="0.3" />
+        <line x1="22" y1="98" x2="36" y2="84" opacity="0.3" />
+        <line x1="98" y1="98" x2="84" y2="84" opacity="0.3" />
+      </g>
+      <circle cx="60" cy="60" r="3" fill="#5eead4" />
+    </svg>
+
+    <a href="/" class="btn">← BACK TO ALL INTEL</a>
+
+    <div style="margin-top:28px;font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <a href="/genre/rts" style="color:var(--text-muted);text-decoration:none;">RTS</a>
+      <a href="/genre/mmo" style="color:var(--text-muted);text-decoration:none;">MMO</a>
+      <a href="/genre/rpg" style="color:var(--text-muted);text-decoration:none;">RPG</a>
+      <a href="/genre/hardware" style="color:var(--text-muted);text-decoration:none;">HARDWARE</a>
+    </div>
+  </div>
+</Layout>
