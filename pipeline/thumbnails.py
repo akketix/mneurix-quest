@@ -1,0 +1,220 @@
+"""
+Thumbnail resolution for MNEURIX // QUEST articles.
+
+Policy (config.THUMBNAIL_POLICY): official -> ai -> branded.
+
+  official: Steam capsule image (from appid) or YouTube trailer thumbnail.
+            Always accurate, free, zero hallucination.
+  ai:       ComfyUI text-to-image with a fact-scoped prompt, gated by a visual
+            QA critic. FAIL-CLOSED: if ComfyUI is offline OR the QA critic is
+            unavailable OR the image fails QA, we fall through to branded.
+  branded:  deterministic 1200x630 cover (radar motif + game title + genre pill)
+            rendered via tools/gen-covers.mjs (sharp). Always coherent.
+
+Never returns a random stock photo.
+"""
+
+import base64
+import json
+import logging
+import subprocess
+import time
+from pathlib import Path
+from typing import Any
+
+import httpx
+
+from config import (
+    BASE_DIR,
+    COMFYUI_HOST,
+    COVERS_DIR,
+    THUMBNAIL_QA_MAX_ATTEMPTS,
+    THUMBNAIL_QA_MIN_SCORE,
+    THUMBNAIL_POLICY,
+)
+from ingestion import extract_steam_appid
+from verifier import validate_trailer_id
+
+logger = logging.getLogger("thumbnails")
+
+_COVERS_PUBLIC = COVERS_DIR.relative_to(BASE_DIR / "public") if (BASE_DIR / "public") in COVERS_DIR.parents else None
+# public/covers -> "/covers"
+_PUBLIC_PREFIX = "/" + COVERS_DIR.relative_to(BASE_DIR / "public").as_posix()
+_GEN_TOOLS = BASE_DIR / "tools" / "gen-covers.mjs"
+
+
+def _reachable(url: str, timeout: float = 8.0) -> bool:
+    try:
+        with httpx.Client(timeout=timeout, follow_redirects=True) as c:
+            r = c.head(url, headers={"User-Agent": "MNEURIX-Quest/1.0"})
+        return r.status_code < 400 and r.status_code != 405
+    except Exception:
+        return False
+
+
+def resolve_official_thumbnail(facts: dict[str, Any], source_url: str) -> str | None:
+    """Return a reachable official image URL, or None."""
+    # 1. Steam capsule from the source appid.
+    appid = extract_steam_appid(source_url or "")
+    if appid:
+        capsule = f"https://cdn.cloudflare.steamstatic.com/steam/apps/{appid}/header.jpg"
+        if _reachable(capsule):
+            return capsule
+    # 2. YouTube trailer thumbnail from a validated trailer ID.
+    tid = (facts.get("trailerId") or "").strip()
+    if tid:
+        tv = validate_trailer_id(tid, game_title=facts.get("gameTitle"))
+        if tv["valid"]:
+            for host in ("maxresdefault", "hqdefault"):
+                yt = f"https://img.youtube.com/vi/{tid}/{host}.jpg"
+                if _reachable(yt):
+                    return yt
+    return None
+
+
+def _comfyui_reachable() -> bool:
+    try:
+        with httpx.Client(timeout=5.0) as c:
+            r = c.get(f"{COMFYUI_HOST}/system_stats")
+        return r.status_code < 400
+    except Exception:
+        return False
+
+
+def _ollama_vision_qa(image_path: Path, game_title: str, genre: str) -> bool:
+    """Fail-closed visual QA via an Ollama vision model. Returns True only if the
+    image is judged a coherent, on-brand cover for the game."""
+    try:
+        b64 = base64.b64encode(image_path.read_bytes()).decode()
+    except Exception as e:
+        logger.warning(f"QA: cannot read image {image_path}: {e}")
+        return False
+    system = "You are a strict visual QA critic for a gaming-news site's article cover images."
+    user = (
+        f"This is a generated cover image for a {genre} gaming article titled "
+        f"'{game_title}'. Rate it 0-100 on: (a) visual coherence (not garbled/blurry/"
+        f"nonsensical), (b) relevance to a gaming context. Reply with JSON only: "
+        f'{{"score": int, "reason": str}}. Score >= {THUMBNAIL_QA_MIN_SCORE} means acceptable.'
+    )
+    # Try a vision-capable model; fall through if unavailable.
+    for model in ("kimi-k3:cloud", "gemini-3-flash-preview:cloud"):
+        try:
+            with httpx.Client(timeout=120.0) as c:
+                resp = c.post(
+                    "http://localhost:11434/api/chat",
+                    json={
+                        "model": model,
+                        "stream": False,
+                        "messages": [
+                            {"role": "system", "content": system},
+                            {"role": "user", "content": user, "images": [b64]},
+                        ],
+                        "format": "json",
+                    },
+                )
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            content = data.get("message", {}).get("content", "")
+            parsed = json.loads(content)
+            return int(parsed.get("score", 0)) >= THUMBNAIL_QA_MIN_SCORE
+        except Exception:
+            continue
+    return False  # no vision model available -> fail-closed
+
+
+def generate_ai_thumbnail(facts: dict[str, Any], source_text: str, slug: str) -> str | None:
+    """Generate an AI cover via ComfyUI + QA gate. Fail-closed -> None."""
+    if not _comfyui_reachable():
+        logger.info("AI thumbnail: ComfyUI offline -> falling back.")
+        return None
+    COVERS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = COVERS_DIR / f"{slug}.png"
+    game = facts.get("gameTitle", "the game")
+    genre = facts.get("genre", "RTS")
+    prompt = (
+        f"clean digital key art for a {genre} game '{game}', "
+        f"dark cyber aesthetic, teal and slate palette, abstract tactical radar motif, "
+        f"no text, no watermark, high detail, cinematic"
+    )
+    # Minimal ComfyUI txt2img workflow (API format). Generous try/except = fail-closed.
+    workflow = {
+        "3": {"class_type": "KSampler", "inputs": {
+            "seed": abs(hash(prompt)) % (10**9), "steps": 28, "cfg": 7.0,
+            "sampler_name": "dpmpp_2m", "scheduler": "karras", "denoise": 1.0,
+            "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]}},
+        "4": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"}},
+        "5": {"class_type": "EmptyLatentImage", "inputs": {"width": 1024, "height": 576, "batch_size": 1}},
+        "6": {"class_type": "CLIPTextEncode", "inputs": {"text": prompt, "clip": ["4", 1]}},
+        "7": {"class_type": "CLIPTextEncode", "inputs": {"text": "text, watermark, blurry, deformed, low quality", "clip": ["4", 1]}},
+        "8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
+        "9": {"class_type": "SaveImage", "inputs": {"filename_prefix": slug, "images": ["8", 0]}},
+    }
+    try:
+        with httpx.Client(timeout=30.0) as c:
+            pr = c.post(f"{COMFYUI_HOST}/prompt", json={"prompt": workflow})
+            pr.raise_for_status()
+            pid = pr.json()["prompt_id"]
+            for _ in range(60):  # poll up to ~5 min
+                time.sleep(5)
+                h = c.get(f"{COMFYUI_HOST}/history/{pid}").json()
+                if pid in h:
+                    outputs = h[pid].get("outputs", {})
+                    fname = next(iter(next(iter(outputs.values())).get("images", [{}])))["filename"]
+                    sub = next(iter(next(iter(outputs.values())).get("images", [{}]))).get("subfolder", "")
+                    img = c.get(f"{COMFYUI_HOST}/view", params={"filename": fname, "subfolder": sub})
+                    img.raise_for_status()
+                    out_path.write_bytes(img.content)
+                    break
+            else:
+                return None
+    except Exception as e:
+        logger.warning(f"AI thumbnail generation failed: {e}")
+        return None
+    # QA gate (fail-closed).
+    for _ in range(THUMBNAIL_QA_MAX_ATTEMPTS):
+        if _ollama_vision_qa(out_path, game, genre):
+            return f"{_PUBLIC_PREFIX}/{slug}.png"
+        logger.info("AI thumbnail failed QA; would retry.")
+        break  # re-generation not wired in this minimal client; fail-closed.
+    return None
+
+
+def branded_thumbnail(slug: str, game_title: str, genre: str) -> str | None:
+    """Render a deterministic branded cover PNG via tools/gen-covers.mjs."""
+    COVERS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = COVERS_DIR / f"{slug}.png"
+    if out_path.exists():
+        return f"{_PUBLIC_PREFIX}/{slug}.png"
+    try:
+        subprocess.run(
+            ["node", str(_GEN_TOOLS), "--single", slug, game_title, genre],
+            check=True, capture_output=True, timeout=60,
+        )
+    except Exception as e:
+        logger.error(f"Branded cover generation failed for {slug}: {e}")
+        return None
+    return f"{_PUBLIC_PREFIX}/{slug}.png" if out_path.exists() else None
+
+
+def resolve_thumbnail(facts: dict[str, Any], source_url: str, slug: str, source_text: str = "") -> dict[str, Any]:
+    """Resolve the article hero image per policy. Returns {url, source, meta}."""
+    result: dict[str, Any] = {"url": "", "source": "none", "meta": {}}
+    for tier in THUMBNAIL_POLICY:
+        if tier == "official":
+            url = resolve_official_thumbnail(facts, source_url)
+            if url:
+                result.update(url=url, source="official")
+                return result
+        elif tier == "ai":
+            url = generate_ai_thumbnail(facts, source_text, slug)
+            if url:
+                result.update(url=url, source="ai")
+                return result
+        elif tier == "branded":
+            url = branded_thumbnail(slug, facts.get("gameTitle", slug), facts.get("genre", "RPG"))
+            if url:
+                result.update(url=url, source="branded")
+                return result
+    logger.warning(f"No thumbnail resolved for {slug}.")
+    return result
