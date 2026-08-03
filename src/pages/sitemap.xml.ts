@@ -9,12 +9,23 @@ export async function GET() {
 
   const baseUrl = SITE_CONFIG.url;
 
-  const staticPages = [
+  // Most-recent content date — used as lastmod for content listing pages so
+  // crawlers re-fetch when new intel lands, instead of "today" on every build.
+  const latestContentDate = sortedPosts.length
+    ? new Date(sortedPosts[0].data.date).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  // Content listing pages track the latest article; static legal/about/tools
+  // pages omit lastmod (they rarely change; changefreq + priority suffice).
+  const contentPages = [
     { url: '/', priority: '1.0', changefreq: 'daily' },
     { url: '/genre/rts', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/mmo', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/rpg', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/hardware', priority: '0.9', changefreq: 'daily' },
+  ];
+
+  const staticPages = [
     { url: '/tools/specs-calculator', priority: '0.8', changefreq: 'weekly' },
     { url: '/about', priority: '0.7', changefreq: 'monthly' },
     { url: '/cookies', priority: '0.5', changefreq: 'monthly' },
@@ -34,16 +45,24 @@ export async function GET() {
     </url>`;
   }).join('');
 
+  const contentXml = contentPages.map(page => `
+    <url>
+      <loc>${baseUrl}${page.url}</loc>
+      <lastmod>${latestContentDate}</lastmod>
+      <changefreq>${page.changefreq}</changefreq>
+      <priority>${page.priority}</priority>
+    </url>`).join('');
+
   const staticXml = staticPages.map(page => `
     <url>
       <loc>${baseUrl}${page.url}</loc>
-      <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
       <changefreq>${page.changefreq}</changefreq>
       <priority>${page.priority}</priority>
     </url>`).join('');
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${contentXml}
 ${staticXml}
 ${articlesXml}
 </urlset>`;
