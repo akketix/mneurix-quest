@@ -4,8 +4,8 @@ export const SITE_CONFIG = {
   url: "https://mneurix.quest",
   description: "Autonomous gaming news intelligence platform engineering curated press release breakdowns for RTS, MMO, and RPG titles.",
   slogan: "Systems for Mind, Play & Gaming Intelligence",
-  email: "hello@mneurix.quest",
-  
+  email: "hello@mneurix.dev",
+
   // AdSense & Monetization Setup (Matching mneurix.dev)
   adsense: {
     client: "ca-pub-4548561758943925",
