@@ -1,0 +1,125 @@
+name: Pipeline Maintenance
+
+# Periodic upkeep for the MNEURIX // QUEST agentic article pipeline.
+# Auto-applies NO-LLM maintenance (strip invalid trailer IDs, upgrade and
+# localize hero images to real game art) and leaves a sticky reminder issue
+# for the LLM-dependent tasks that need the local Ollama gateway and so must
+# be run manually.
+on:
+  schedule:
+    # Mondays 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit + push maintenance fixes
+  issues: write     # upsert the reminder issue
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+
+      - name: Install pipeline dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r pipeline/requirements.txt
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: "Audit and fix frontmatter"
+        run: |
+          python pipeline/run_pipeline.py --audit --fix \
+            > /tmp/audit.txt 2>&1 || true
+          echo "---- audit output ----"
+          cat /tmp/audit.txt
+
+      - name: "Upgrade and localize hero images"
+        run: |
+          python pipeline/run_pipeline.py --upgrade-images \
+            > /tmp/upgrade.txt 2>&1 || true
+          echo "---- upgrade output ----"
+          cat /tmp/upgrade.txt
+
+      - name: "Commit and push maintenance changes"
+        run: |
+          git config user.name "mneurix-quest-bot"
+          git config user.email "actions@github.com"
+          git add src/content/news public/covers
+          if git diff --cached --quiet; then
+            echo "No maintenance changes this run."
+          else
+            git commit -m "chore(pipeline): weekly maintenance [skip ci]"
+            git push
+          fi
+
+      - name: "Upsert reminder issue"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const read = (p, d) => fs.existsSync(p)
+              ? fs.readFileSync(p, 'utf8') : d;
+            const aud = read('/tmp/audit.txt', '(no output)');
+            const upg = read('/tmp/upgrade.txt', '(no output)');
+            const stamp = new Date().toISOString().slice(0, 10);
+            const tail = (s) => s.split('\n').slice(-20).join('\n');
+            const body = [
+              `### Weekly Pipeline Maintenance - ${stamp}`,
+              '',
+              'Auto-applied (no LLM required):',
+              '- audit --fix: strip invalid trailer IDs, fix stock images',
+              '- upgrade-images: real game art (Wikipedia/Steam/YT) + localize',
+              '',
+              '#### Audit output',
+              '```',
+              tail(aud),
+              '```',
+              '#### Upgrade output',
+              '```',
+              tail(upg),
+              '```',
+              '',
+              '### Manual tasks (need local Ollama gateway, glm-5.2:cloud)',
+              '- audit --verify: best-effort claim re-verification vs sourceUrl',
+              '- provider ollama --limit 3: generate new grounded articles',
+              '- seeds + provider ollama: generate from explicit seed URLs',
+              '- once ComfyUI is online, re-run upgrade-images for AI art',
+              '',
+              '_Updated each Monday; older summaries stay in comments._',
+            ].join('\n');
+            const title = 'Weekly Pipeline Maintenance';
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const existing = issues.find((i) => i.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+              core.info(`Commented on issue #${existing.number}`);
+            } else {
+              const { data: created } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+              core.info(`Created issue #${created.number}`);
+            }
