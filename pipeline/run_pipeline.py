@@ -269,7 +269,7 @@ def run_seeds(seeds_path: str, provider: str, limit: int) -> None:
         body = generate_editorial_article(
             facts, raw["summary"], provider=provider, source_text=source_text
         )
-        publish_article(facts, body, link, 8, source_text=source_text, title=title)
+        publish_article(facts, body, link, 8, source_text=source_text)
     logger.info("Seed run finished.")
 
 
@@ -290,11 +290,17 @@ def upgrade_images() -> None:
         game_title = str(meta.get("gameTitle") or slug)
         genre = str(meta.get("genre") or "RPG")
         remote = resolve_official_thumbnail(
-            {"gameTitle": game_title, "genre": genre, "trailerId": str(meta.get("trailerId") or "")},
+            {
+                "gameTitle": game_title,
+                "genre": genre,
+                "trailerId": str(meta.get("trailerId") or ""),
+            },
             str(meta.get("sourceUrl") or ""),
         )
         chosen = remote
-        if not chosen and str(meta.get("heroImage") or "").startswith(("http://", "https://")):
+        if not chosen and str(meta.get("heroImage") or "").startswith(
+            ("http://", "https://")
+        ):
             chosen = str(meta.get("heroImage"))  # localize an existing remote image
         if chosen:
             local = localize_image(chosen, slug)
@@ -371,4 +377,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

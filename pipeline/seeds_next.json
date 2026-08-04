@@ -1,0 +1,13 @@
+[
+  { "title": "Total War: Warhammer III", "link": "https://en.wikipedia.org/wiki/Total_War:_Warhammer_III", "genre": "RTS" },
+  { "title": "Ara: History Untold", "link": "https://en.wikipedia.org/wiki/Ara:_History_Untold", "genre": "RTS" },
+  { "title": "Dune: Awakening", "link": "https://en.wikipedia.org/wiki/Dune:_Awakening", "genre": "MMO" },
+  { "title": "Once Human", "link": "https://en.wikipedia.org/wiki/Once_Human", "genre": "MMO" },
+  { "title": "Elden Ring", "link": "https://en.wikipedia.org/wiki/Elden_Ring", "genre": "RPG" },
+  { "title": "Metaphor: ReFantazio", "link": "https://en.wikipedia.org/wiki/Metaphor:_ReFantazio", "genre": "RPG" },
+  { "title": "Final Fantasy VII Rebirth", "link": "https://en.wikipedia.org/wiki/Final_Fantasy_VII_Rebirth", "genre": "RPG" },
+  { "title": "The Witcher 4", "link": "https://en.wikipedia.org/wiki/The_Witcher_4", "genre": "RPG" },
+  { "title": "Cyberpunk 2077", "link": "https://en.wikipedia.org/wiki/Cyberpunk_2077", "genre": "RPG" },
+  { "title": "PlayStation 5 Pro", "link": "https://en.wikipedia.org/wiki/PlayStation_5_Pro", "genre": "HARDWARE" },
+  { "title": "AMD Ryzen 9000 series", "link": "https://en.wikipedia.org/wiki/AMD_Ryzen_9000", "genre": "HARDWARE" }
+]
