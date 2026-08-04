@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from config import SITE_NEWS_DIR, VALID_GENRES
-from thumbnails import resolve_thumbnail
+from thumbnails import localize_image, resolve_thumbnail
 from verifier import (
     extract_quotes,
     find_banned_words,
@@ -76,6 +76,10 @@ def publish_article(
     # 3. Thumbnail resolution (official -> ai -> branded).
     thumb = resolve_thumbnail(facts, raw_link, slug, source_text)
     hero_image = thumb.get("url") or str(facts.get("heroImage", "")).strip()
+    if hero_image.startswith(("http://", "https://")):
+        local_img = localize_image(hero_image, slug)
+        if local_img:
+            hero_image = local_img
     if not hero_image:
         logger.warning(f"No hero image resolved for {slug}; publishing without one.")
     logger.info(f"Thumbnail for {slug}: {thumb.get('source')} -> {hero_image}")

@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Baldur's Gate 3",
+    "link": "https://en.wikipedia.org/wiki/Baldur%27s_Gate_3",
+    "genre": "RPG"
+  },
+  {
+    "title": "Company of Heroes 3",
+    "link": "https://en.wikipedia.org/wiki/Company_of_Heroes_3",
+    "genre": "RTS"
+  },
+  {
+    "title": "Throne and Liberty",
+    "link": "https://en.wikipedia.org/wiki/Throne_and_Liberty",
+    "genre": "MMO"
+  },
+  {
+    "title": "Dragon's Dogma 2",
+    "link": "https://en.wikipedia.org/wiki/Dragon%27s_Dogma_2",
+    "genre": "RPG"
+  },
+  {
+    "title": "GeForce RTX 50 series",
+    "link": "https://en.wikipedia.org/wiki/GeForce_RTX_50_series",
+    "genre": "HARDWARE"
+  }
+]
