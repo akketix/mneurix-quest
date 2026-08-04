@@ -1,16 +1,21 @@
 ---
-title: "Manor Lords"
-date: "2026-08-03"
-gameTitle: "Manor Lords"
-developer: "Slavic Magic"
-genre: "RTS"
-platforms: ["Windows"]
-releaseWindow: "26 April 2024 (early access)"
-heroImage: "/covers/manor-lords-rts.png"
+title: Manor Lords
+date: '2025-10-02'
+gameTitle: Manor Lords
+developer: Slavic Magic
+genre: RTS
+platforms:
+- Windows
+releaseWindow: 26 April 2024 (early access)
+heroImage: https://upload.wikimedia.org/wikipedia/en/b/ba/Manor_Lords_box_art.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
 impactScore: 8
-sourceUrl: "https://en.wikipedia.org/wiki/Manor_Lords"
-summary: "Manor Lords is a medieval city-builder and real-time tactics game developed by Slavic Magic and published by Hooded Horse, released into early access on April 26, 2024."
+sourceUrl: https://en.wikipedia.org/wiki/Manor_Lords
+summary: Manor Lords is a medieval city-builder and real-time tactics game developed
+  by Slavic Magic and published by Hooded Horse, released into early access on April
+  26, 2024.
 ---
+
+
 
 Manor Lords, the medieval city-builder and real-time tactics game from Slavic Magic, launched into early access on April 26, 2024 with immediate commercial success. The title sold over one million copies during its launch weekend and surpassed three million total sales by February 2025. Developed by Grzegorz "Greg" Styczeń and published by Hooded Horse, Manor Lords overtook Hades II shortly before release to become the most-wishlisted game on Steam, accumulating over three million wishlists by launch.
 

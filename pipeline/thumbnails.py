@@ -37,7 +37,11 @@ from verifier import validate_trailer_id
 
 logger = logging.getLogger("thumbnails")
 
-_COVERS_PUBLIC = COVERS_DIR.relative_to(BASE_DIR / "public") if (BASE_DIR / "public") in COVERS_DIR.parents else None
+_COVERS_PUBLIC = (
+    COVERS_DIR.relative_to(BASE_DIR / "public")
+    if (BASE_DIR / "public") in COVERS_DIR.parents
+    else None
+)
 # public/covers -> "/covers"
 _PUBLIC_PREFIX = "/" + COVERS_DIR.relative_to(BASE_DIR / "public").as_posix()
 _GEN_TOOLS = BASE_DIR / "tools" / "gen-covers.mjs"
@@ -52,14 +56,87 @@ def _reachable(url: str, timeout: float = 8.0) -> bool:
         return False
 
 
+def resolve_steam_screenshot(appid: int, timeout: float = 12.0) -> str | None:
+    """Pull a real in-game screenshot (or header) from the Steam appdetails API."""
+    try:
+        with httpx.Client(timeout=timeout, headers={"User-Agent": "MNEURIX-Quest/1.0"}) as c:
+            r = c.get(f"https://store.steampowered.com/api/appdetails?appids={appid}&l=english")
+        data = r.json()
+        app = data.get(str(appid), {}).get("data", {}) or {}
+        shots = app.get("screenshots") or []
+        if shots:
+            return shots[0].get("path_full") or shots[0].get("path")
+        return app.get("header_image") or app.get("capsule_image")
+    except Exception:
+        return None
+
+
+def resolve_wikipedia_image(game_title: str, timeout: float = 12.0) -> str | None:
+    """Pull a real showcase image (gameplay screenshot preferred, then cover art)
+    for a game from Wikipedia via the images+imageinfo APIs. Free, no API key.
+    Skips non-image files and irrelevant assets (flags/logos/cosplay)."""
+    if not game_title:
+        return None
+    ua = "MNEURIX-Quest/1.0 (https://mneurix.quest; hello@mneurix.quest)"
+    skip_ext = (".svg", ".webm", ".ogv", ".gif", ".tif", ".tiff", ".ogg", ".pdf")
+    skip_words = ("flag", "logo", "map", "icon", "collage", "cosplay", "poster", "award")
+
+    def score(fname: str) -> int:
+        low = fname.lower()
+        if any(low.endswith(ext) for ext in skip_ext):
+            return -1
+        if any(w in low for w in skip_words):
+            return -1
+        if any(w in low for w in ("gameplay", "screenshot", "screen", "in-game")):
+            return 3
+        if any(w in low for w in ("cover", "box art", "cover art", "art")):
+            return 2
+        return 1
+
+    try:
+        with httpx.Client(timeout=timeout, headers={"User-Agent": ua}) as c:
+            r = c.get(
+                "https://en.wikipedia.org/w/api.php",
+                params={"action": "query", "format": "json", "titles": game_title, "prop": "images", "imlimit": 20},
+            )
+            pages = r.json().get("query", {}).get("pages", {})
+            files: list[str] = []
+            for pg in pages.values():
+                for im in (pg.get("images") or []):
+                    files.append(im.get("title", ""))
+            ranked = sorted(
+                [(f, score(f)) for f in files], key=lambda x: x[1], reverse=True
+            )
+            for fname, s in ranked:
+                if s < 0:
+                    continue
+                rr = c.get(
+                    "https://en.wikipedia.org/w/api.php",
+                    params={"action": "query", "format": "json", "titles": fname, "prop": "imageinfo", "iiprop": "url"},
+                )
+                for p in (rr.json().get("query", {}).get("pages", {}).values()):
+                    ii = p.get("imageinfo") or []
+                    if ii and ii[0].get("url"):
+                        return ii[0]["url"]
+    except Exception:
+        return None
+    return None
+
+
 def resolve_official_thumbnail(facts: dict[str, Any], source_url: str) -> str | None:
     """Return a reachable official image URL, or None."""
     # 1. Steam capsule from the source appid.
     appid = extract_steam_appid(source_url or "")
     if appid:
-        capsule = f"https://cdn.cloudflare.steamstatic.com/steam/apps/{appid}/header.jpg"
+        capsule = (
+            f"https://cdn.cloudflare.steamstatic.com/steam/apps/{appid}/header.jpg"
+        )
         if _reachable(capsule):
             return capsule
+        # Steam appdetails: a real in-game screenshot for this app.
+        shot = resolve_steam_screenshot(appid)
+        if shot and _reachable(shot):
+            return shot
     # 2. YouTube trailer thumbnail from a validated trailer ID.
     tid = (facts.get("trailerId") or "").strip()
     if tid:
@@ -69,6 +146,10 @@ def resolve_official_thumbnail(facts: dict[str, Any], source_url: str) -> str | 
                 yt = f"https://img.youtube.com/vi/{tid}/{host}.jpg"
                 if _reachable(yt):
                     return yt
+    # 3. Wikipedia/Wikimedia infobox image for the game (real cover art).
+    wiki = resolve_wikipedia_image(facts.get("gameTitle", ""))
+    if wiki:
+        return wiki
     return None
 
 
@@ -123,7 +204,9 @@ def _ollama_vision_qa(image_path: Path, game_title: str, genre: str) -> bool:
     return False  # no vision model available -> fail-closed
 
 
-def generate_ai_thumbnail(facts: dict[str, Any], source_text: str, slug: str) -> str | None:
+def generate_ai_thumbnail(
+    facts: dict[str, Any], source_text: str, slug: str
+) -> str | None:
     """Generate an AI cover via ComfyUI + QA gate. Fail-closed -> None."""
     if not _comfyui_reachable():
         logger.info("AI thumbnail: ComfyUI offline -> falling back.")
@@ -139,16 +222,48 @@ def generate_ai_thumbnail(facts: dict[str, Any], source_text: str, slug: str) ->
     )
     # Minimal ComfyUI txt2img workflow (API format). Generous try/except = fail-closed.
     workflow = {
-        "3": {"class_type": "KSampler", "inputs": {
-            "seed": abs(hash(prompt)) % (10**9), "steps": 28, "cfg": 7.0,
-            "sampler_name": "dpmpp_2m", "scheduler": "karras", "denoise": 1.0,
-            "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]}},
-        "4": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"}},
-        "5": {"class_type": "EmptyLatentImage", "inputs": {"width": 1024, "height": 576, "batch_size": 1}},
-        "6": {"class_type": "CLIPTextEncode", "inputs": {"text": prompt, "clip": ["4", 1]}},
-        "7": {"class_type": "CLIPTextEncode", "inputs": {"text": "text, watermark, blurry, deformed, low quality", "clip": ["4", 1]}},
-        "8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
-        "9": {"class_type": "SaveImage", "inputs": {"filename_prefix": slug, "images": ["8", 0]}},
+        "3": {
+            "class_type": "KSampler",
+            "inputs": {
+                "seed": abs(hash(prompt)) % (10**9),
+                "steps": 28,
+                "cfg": 7.0,
+                "sampler_name": "dpmpp_2m",
+                "scheduler": "karras",
+                "denoise": 1.0,
+                "model": ["4", 0],
+                "positive": ["6", 0],
+                "negative": ["7", 0],
+                "latent_image": ["5", 0],
+            },
+        },
+        "4": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"},
+        },
+        "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {"width": 1024, "height": 576, "batch_size": 1},
+        },
+        "6": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {"text": prompt, "clip": ["4", 1]},
+        },
+        "7": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+                "text": "text, watermark, blurry, deformed, low quality",
+                "clip": ["4", 1],
+            },
+        },
+        "8": {
+            "class_type": "VAEDecode",
+            "inputs": {"samples": ["3", 0], "vae": ["4", 2]},
+        },
+        "9": {
+            "class_type": "SaveImage",
+            "inputs": {"filename_prefix": slug, "images": ["8", 0]},
+        },
     }
     try:
         with httpx.Client(timeout=30.0) as c:
@@ -160,9 +275,16 @@ def generate_ai_thumbnail(facts: dict[str, Any], source_text: str, slug: str) ->
                 h = c.get(f"{COMFYUI_HOST}/history/{pid}").json()
                 if pid in h:
                     outputs = h[pid].get("outputs", {})
-                    fname = next(iter(next(iter(outputs.values())).get("images", [{}])))["filename"]
-                    sub = next(iter(next(iter(outputs.values())).get("images", [{}]))).get("subfolder", "")
-                    img = c.get(f"{COMFYUI_HOST}/view", params={"filename": fname, "subfolder": sub})
+                    fname = next(
+                        iter(next(iter(outputs.values())).get("images", [{}]))
+                    )["filename"]
+                    sub = next(
+                        iter(next(iter(outputs.values())).get("images", [{}]))
+                    ).get("subfolder", "")
+                    img = c.get(
+                        f"{COMFYUI_HOST}/view",
+                        params={"filename": fname, "subfolder": sub},
+                    )
                     img.raise_for_status()
                     out_path.write_bytes(img.content)
                     break
@@ -189,7 +311,9 @@ def branded_thumbnail(slug: str, game_title: str, genre: str) -> str | None:
     try:
         subprocess.run(
             ["node", str(_GEN_TOOLS), "--single", slug, game_title, genre],
-            check=True, capture_output=True, timeout=60,
+            check=True,
+            capture_output=True,
+            timeout=60,
         )
     except Exception as e:
         logger.error(f"Branded cover generation failed for {slug}: {e}")
@@ -197,7 +321,9 @@ def branded_thumbnail(slug: str, game_title: str, genre: str) -> str | None:
     return f"{_PUBLIC_PREFIX}/{slug}.png" if out_path.exists() else None
 
 
-def resolve_thumbnail(facts: dict[str, Any], source_url: str, slug: str, source_text: str = "") -> dict[str, Any]:
+def resolve_thumbnail(
+    facts: dict[str, Any], source_url: str, slug: str, source_text: str = ""
+) -> dict[str, Any]:
     """Resolve the article hero image per policy. Returns {url, source, meta}."""
     result: dict[str, Any] = {"url": "", "source": "none", "meta": {}}
     for tier in THUMBNAIL_POLICY:
@@ -212,7 +338,9 @@ def resolve_thumbnail(facts: dict[str, Any], source_url: str, slug: str, source_
                 result.update(url=url, source="ai")
                 return result
         elif tier == "branded":
-            url = branded_thumbnail(slug, facts.get("gameTitle", slug), facts.get("genre", "RPG"))
+            url = branded_thumbnail(
+                slug, facts.get("gameTitle", slug), facts.get("genre", "RPG")
+            )
             if url:
                 result.update(url=url, source="branded")
                 return result

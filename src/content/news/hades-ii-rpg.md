@@ -1,16 +1,26 @@
 ---
-title: "Hades II"
-date: "2026-08-03"
-gameTitle: "Hades II"
-developer: "Supergiant Games"
-genre: "RPG"
-platforms: ["macOS", "Nintendo Switch", "Nintendo Switch 2", "Windows", "PlayStation 5", "Xbox Series X/S"]
-releaseWindow: "September 25, 2025 (macOS, Switch, Switch 2, Windows); April 14, 2026 (PS5, Xbox Series X/S)"
-heroImage: "/covers/hades-ii-rpg.png"
+title: Hades II
+date: '2026-04-14'
+gameTitle: Hades II
+developer: Supergiant Games
+genre: RPG
+platforms:
+- macOS
+- Nintendo Switch
+- Nintendo Switch 2
+- Windows
+- PlayStation 5
+- Xbox Series X/S
+releaseWindow: September 25, 2025 (macOS, Switch, Switch 2, Windows); April 14, 2026
+  (PS5, Xbox Series X/S)
+heroImage: https://upload.wikimedia.org/wikipedia/en/5/5d/Hades_II_gameplay.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
 impactScore: 8
-sourceUrl: "https://en.wikipedia.org/wiki/Hades_II"
-summary: "Hades II is a roguelike action role-playing game developed and published by Supergiant Games, serving as the studio's first sequel to Hades (2020)."
+sourceUrl: https://en.wikipedia.org/wiki/Hades_II
+summary: Hades II is a roguelike action role-playing game developed and published
+  by Supergiant Games, serving as the studio's first sequel to Hades (2020).
 ---
+
+
 
 Supergiant Games shipped *Hades II*, its first sequel, as a roguelike action RPG across two platform waves. The game launched September 25, 2025 on macOS, Windows, Nintendo Switch, and Nintendo Switch 2, with PlayStation 5 and Xbox Series X/S versions following on April 14, 2026. Early access began on Windows in May 2024 and macOS in October 2024. Greg Kasavin directed, with art by Jen Zee and a score from Darren Korb and Austin Wintory.
 

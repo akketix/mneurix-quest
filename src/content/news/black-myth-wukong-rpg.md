@@ -1,16 +1,22 @@
 ---
-title: "Black Myth: Wukong"
-date: "2026-08-03"
-gameTitle: "Black Myth: Wukong"
-developer: "Game Science"
-genre: "RPG"
-platforms: ["PlayStation 5", "Windows", "Xbox Series X/S"]
-releaseWindow: "August 20, 2024 (PS5, Windows); August 20, 2025 (Xbox Series X/S)"
-heroImage: "/covers/black-myth-wukong-rpg.png"
+title: 'Black Myth: Wukong'
+date: '2025-08-20'
+gameTitle: 'Black Myth: Wukong'
+developer: Game Science
+genre: RPG
+platforms:
+- PlayStation 5
+- Windows
+- Xbox Series X/S
+releaseWindow: August 20, 2024 (PS5, Windows); August 20, 2025 (Xbox Series X/S)
+heroImage: https://upload.wikimedia.org/wikipedia/en/a/a6/Black_Myth_Wukong_cover_art.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
 impactScore: 8
-sourceUrl: "https://en.wikipedia.org/wiki/Black_Myth:_Wukong"
-summary: "Developed and published by Chinese studio Game Science using Unreal Engine 5"
+sourceUrl: https://en.wikipedia.org/wiki/Black_Myth:_Wukong
+summary: Developed and published by Chinese studio Game Science using Unreal Engine
+  5
 ---
+
+
 
 Black Myth: Wukong is a 2024 single-player action role-playing game developed and published by Chinese studio Game Science using Unreal Engine 5. Released for PlayStation 5 and Windows on August 20, 2024, and scheduled for Xbox Series X/S on August 20, 2025, the title sold 20 million units in its first month.
 

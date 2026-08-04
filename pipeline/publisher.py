@@ -108,7 +108,14 @@ def publish_article(
     SITE_NEWS_DIR.mkdir(parents=True, exist_ok=True)
     file_path = SITE_NEWS_DIR / f"{slug}.md"
     date_str = datetime.now().strftime("%Y-%m-%d")
-    article_title = title or (str(facts.get("headline") or "").strip()) or f"{game_title}: Official Update & Technical Overview"
+    pub = str(facts.get("publishDate") or "").strip()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", pub):
+        date_str = pub
+    article_title = (
+        title
+        or (str(facts.get("headline") or "").strip())
+        or f"{game_title}: Official Update & Technical Overview"
+    )
     platforms = facts.get("platforms") or ["PC"]
     summary = (
         str(facts.get("keyFacts", [""])[:1][0] if facts.get("keyFacts") else "")

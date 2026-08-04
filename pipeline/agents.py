@@ -37,6 +37,9 @@ Output strict JSON with these fields:
 - keyFacts: array of 3 concise bullet strings, each grounded in the source
 - headline: a descriptive article title summarizing the news in this source
   (not just the game name)
+- publishDate: ISO date (YYYY-MM-DD) of the PRIMARY news event this article
+  reports; use the most recent relevant event date mentioned in the source;
+  empty string if no date is determinable
 - evidence: object mapping each of the fields above to a short verbatim span
   from the source that backs it (or null if the field was empty/unknown)
 
@@ -72,6 +75,7 @@ class ExtractedFacts(BaseModel):
     recommendedSpecs: str = ""
     keyFacts: list[str] = Field(default_factory=list)
     headline: str = ""
+    publishDate: str = ""
     evidence: dict[str, Any] = Field(default_factory=dict)
 
     @field_validator("genre")
