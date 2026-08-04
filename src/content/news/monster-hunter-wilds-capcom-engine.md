@@ -9,7 +9,7 @@ platforms:
 - PS5
 - Xbox Series X|S
 releaseWindow: February 28, 2026
-heroImage: /covers/monster-hunter-wilds-capcom-engine.png
+heroImage: /covers/monster-hunter-wilds-capcom-engine.jpg
 impactScore: 10
 sourceUrl: https://www.monsterhunter.com/wilds/
 summary: Capcom outlines RE Engine weather transitions, dynamic monster herd AI, and
@@ -18,6 +18,8 @@ specs:
   minimum: Intel Core i5-10600K / AMD Ryzen 5 3600, 16 GB RAM, NVIDIA GTX 1660 Super
   recommended: Intel Core i7-12700K / AMD Ryzen 7 5700X3D, 16 GB RAM, NVIDIA RTX 4070
 ---
+
+
 
 
 Capcom has released technical developer notes for *Monster Hunter Wilds*, detailing major upgrades to the RE Engine designed to support dense animal herd behaviors and real-time environmental climate cycles.

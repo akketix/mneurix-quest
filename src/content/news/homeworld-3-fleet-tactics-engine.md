@@ -7,7 +7,7 @@ genre: RTS
 platforms:
 - PC
 releaseWindow: Available Now
-heroImage: /covers/homeworld-3-fleet-tactics-engine.png
+heroImage: /covers/homeworld-3-fleet-tactics-engine.jpg
 impactScore: 9
 sourceUrl: https://www.homeworld3.com/
 summary: Blackbird Interactive outlines Megalith 3D space terrain physics, LOS ballistics
@@ -16,6 +16,8 @@ specs:
   minimum: Intel Core i5-8600K / AMD Ryzen 5 3600X, 16 GB RAM, NVIDIA GTX 1060 (6GB)
   recommended: Intel Core i7-12700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3080
 ---
+
+
 
 
 Blackbird Interactive and Gearbox Publishing have released technical post-launch documentation for *Homeworld 3*, detailing the 3D space ballistics engine and Megalith terrain mechanics that modernize the space RTS genre.

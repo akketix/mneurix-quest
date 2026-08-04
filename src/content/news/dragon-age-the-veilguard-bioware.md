@@ -21,6 +21,8 @@ specs:
 ---
 
 
+
+
 BioWare and Electronic Arts have published a deep technical breakdown for *Dragon Age: The Veilguard*, showcasing engine optimizations, combat mechanics, and PC graphical features built on an updated Frostbite engine branch.
 
 ## 1. Strand Hair Physics & Frostbite Engine Upgrades

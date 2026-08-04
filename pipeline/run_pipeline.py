@@ -20,10 +20,10 @@ from typing import Any
 import yaml
 
 from agents import extract_facts, generate_editorial_article
-from config import AUDIT_REPORT, SITE_NEWS_DIR
+from config import AUDIT_REPORT, BASE_DIR, SITE_NEWS_DIR
 from ingestion import fetch_all_feeds, fetch_source_body
 from publisher import publish_article
-from thumbnails import resolve_thumbnail
+from thumbnails import localize_image, resolve_official_thumbnail, resolve_thumbnail
 from triage import triage_and_filter
 from verifier import (
     audit_claims,
@@ -269,10 +269,49 @@ def run_seeds(seeds_path: str, provider: str, limit: int) -> None:
         body = generate_editorial_article(
             facts, raw["summary"], provider=provider, source_text=source_text
         )
-        publish_article(
-            facts, body, link, 8, source_text=source_text, title=title
-        )
+        publish_article(facts, body, link, 8, source_text=source_text, title=title)
     logger.info("Seed run finished.")
+
+
+def upgrade_images() -> None:
+    """Retroactively upgrade existing articles' hero images to real game imagery
+    (Wikipedia/Steam/YouTube) where available, and localize ALL remote hero images
+    into public/covers/. Branded covers are kept where no real image is found."""
+    files = sorted(SITE_NEWS_DIR.glob("*.md"))
+    logger.info(f"Upgrading images for {len(files)} articles.")
+    counts = {"articles": 0, "upgraded": 0, "localized": 0, "kept_branded": 0}
+    for path in files:
+        counts["articles"] += 1
+        slug = path.stem
+        parsed = _read_article(path)
+        if not parsed:
+            continue
+        meta, body = parsed
+        game_title = str(meta.get("gameTitle") or slug)
+        genre = str(meta.get("genre") or "RPG")
+        remote = resolve_official_thumbnail(
+            {"gameTitle": game_title, "genre": genre, "trailerId": str(meta.get("trailerId") or "")},
+            str(meta.get("sourceUrl") or ""),
+        )
+        chosen = remote
+        if not chosen and str(meta.get("heroImage") or "").startswith(("http://", "https://")):
+            chosen = str(meta.get("heroImage"))  # localize an existing remote image
+        if chosen:
+            local = localize_image(chosen, slug)
+            if local:
+                old_hero = str(meta.get("heroImage") or "")
+                meta["heroImage"] = local
+                if old_hero.startswith("/covers/"):
+                    old_file = BASE_DIR / "public" / old_hero.lstrip("/")
+                    if old_file.exists() and old_file.name != local.rsplit("/", 1)[-1]:
+                        old_file.unlink()
+                counts["upgraded" if remote else "localized"] += 1
+                _write_article(path, meta, body)
+                logger.info(f"{slug} -> {local}")
+                continue
+        counts["kept_branded"] += 1
+    logger.info(f"Image upgrade complete: {counts}")
+    print(f"Image upgrade complete: {counts}")
 
 
 def main() -> None:
@@ -311,8 +350,16 @@ def main() -> None:
         default="",
         help="JSON file of seeds [{title, link, genre}] to generate from (bypasses RSS)",
     )
+    parser.add_argument(
+        "--upgrade-images",
+        action="store_true",
+        help="Upgrade existing article hero images to real game art (Wikipedia/Steam/YT) and localize them",
+    )
     args = parser.parse_args()
 
+    if args.upgrade_images:
+        upgrade_images()
+        return
     if args.seeds:
         run_seeds(args.seeds, provider=args.provider, limit=args.limit)
         return

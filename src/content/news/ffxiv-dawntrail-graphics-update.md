@@ -10,7 +10,7 @@ platforms:
 - PS4
 - Xbox Series X|S
 releaseWindow: Available Now
-heroImage: /covers/ffxiv-dawntrail-graphics-update.png
+heroImage: /covers/ffxiv-dawntrail-graphics-update.jpg
 impactScore: 9
 sourceUrl: https://na.finalfantasyxiv.com/dawntrail/
 summary: Square Enix details high-resolution texture pipelines, dual-dye armor channels,
@@ -19,6 +19,8 @@ specs:
   minimum: Intel Core i7-7700 / AMD Ryzen 5 1600, 8 GB RAM, NVIDIA GTX 970
   recommended: Intel Core i7-9700 / AMD Ryzen 7 3700X, 16 GB RAM, NVIDIA RTX 2060
 ---
+
+
 
 
 Square Enix and Producer Naoki Yoshida have published full patch technical documentation for *Final Fantasy XIV: Dawntrail*, detailing the MMO's first major graphics engine overhaul alongside new job specializations (Viper and Pictomancer).

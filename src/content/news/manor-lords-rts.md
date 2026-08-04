@@ -7,13 +7,15 @@ genre: RTS
 platforms:
 - Windows
 releaseWindow: 26 April 2024 (early access)
-heroImage: https://upload.wikimedia.org/wikipedia/en/b/ba/Manor_Lords_box_art.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
+heroImage: /covers/manor-lords-rts.jpg
 impactScore: 8
 sourceUrl: https://en.wikipedia.org/wiki/Manor_Lords
 summary: Manor Lords is a medieval city-builder and real-time tactics game developed
   by Slavic Magic and published by Hooded Horse, released into early access on April
   26, 2024.
 ---
+
+
 
 
 

@@ -8,7 +8,7 @@ platforms:
 - PC
 - Xbox Series X|S
 releaseWindow: 2026 Target
-heroImage: /covers/clockwork-revolution-rts-rpg.png
+heroImage: /covers/clockwork-revolution-rts-rpg.jpg
 impactScore: 9
 sourceUrl: https://www.xbox.com/en-US/games/clockwork-revolution
 summary: inXile Entertainment details time-travel Chronometer mechanics, steampunk
@@ -17,6 +17,8 @@ specs:
   minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1070
   recommended: Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3080
 ---
+
+
 
 
 inXile Entertainment (creators of *Wasteland 3*) has detailed core gameplay mechanics for *Clockwork Revolution*, a first-person steampunk action RPG set in the Victorian metropolis of Avalon.

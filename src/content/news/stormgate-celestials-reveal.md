@@ -8,7 +8,7 @@ genre: RTS
 platforms:
 - PC
 releaseWindow: Early Access Available
-heroImage: /covers/stormgate-celestials-reveal.png
+heroImage: /covers/stormgate-celestials-reveal.jpg
 impactScore: 9
 sourceUrl: https://playstormgate.com/
 summary: Frost Giant Studios reveals core macro mechanics for the Celestial faction
@@ -17,6 +17,8 @@ specs:
   minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060 (6GB)
   recommended: Intel Core i7-12700K / AMD Ryzen 7 5800X3D, 32 GB RAM, NVIDIA RTX 3070
 ---
+
+
 
 
 Frost Giant Studios has released a comprehensive technical breakdown detailing the Celestial faction's macro economy and unit movement architecture in *Stormgate*. Built on Unreal Engine 5 with proprietary SnowPlay technology, the engine processes competitive input ticks at 64Hz across global matchmakers.

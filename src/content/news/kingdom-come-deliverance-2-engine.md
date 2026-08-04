@@ -21,6 +21,8 @@ specs:
 ---
 
 
+
+
 Warhorse Studios has released a technical overview of *Kingdom Come: Deliverance II*, detailing improvements to the directional swordplay combat engine along with the addition of early gunpowder firearms and crossbows.
 
 ## Combat & World Simulation

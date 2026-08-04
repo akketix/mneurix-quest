@@ -7,7 +7,7 @@ genre: MMO
 platforms:
 - PC
 releaseWindow: Alpha 4.0 2026
-heroImage: /covers/star-citizen-pyro-server-meshing.png
+heroImage: /covers/star-citizen-pyro-server-meshing.jpg
 impactScore: 10
 sourceUrl: https://robertsspaceindustries.com/
 summary: Cloud Imperium Games details dynamic server meshing, Replication Layer state
@@ -16,6 +16,8 @@ specs:
   minimum: Intel Core i7-9700K / AMD Ryzen 7 3700X, 32 GB RAM, NVIDIA RTX 2070
   recommended: Intel Core i7-14700K / AMD Ryzen 7 7800X3D, 64 GB RAM, NVIDIA RTX 4080
 ---
+
+
 
 
 Cloud Imperium Games (CIG) has published high-level engineering whitepapers detailing Server Meshing v1.0—the core networking technology enabling thousands of players to smoothly inhabit the multi-star-system universe of *Star Citizen*.

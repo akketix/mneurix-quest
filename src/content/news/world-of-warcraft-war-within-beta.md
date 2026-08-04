@@ -8,7 +8,7 @@ platforms:
 - PC
 - macOS
 releaseWindow: Q3 2026
-heroImage: /covers/world-of-warcraft-war-within-beta.png
+heroImage: /covers/world-of-warcraft-war-within-beta.jpeg
 impactScore: 9
 sourceUrl: https://worldofwarcraft.blizzard.com/
 summary: Blizzard details account-wide Warband progression, cross-realm guild features,
@@ -17,6 +17,8 @@ specs:
   minimum: Intel Core i5-4670K / AMD FX-8350, 8 GB RAM, NVIDIA GTX 960 (4GB)
   recommended: Intel Core i7-11700K / AMD Ryzen 7 5800X, 16 GB RAM, NVIDIA RTX 3060
 ---
+
+
 
 
 Blizzard Entertainment has published the final structural engineering notes for *The War Within* ahead of the global launch window. The update overhauls account progression via the Warband framework, allowing shared bank storage, reputation gains, and transmog collection across all characters on an account.

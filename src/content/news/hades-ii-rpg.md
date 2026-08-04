@@ -13,12 +13,14 @@ platforms:
 - Xbox Series X/S
 releaseWindow: September 25, 2025 (macOS, Switch, Switch 2, Windows); April 14, 2026
   (PS5, Xbox Series X/S)
-heroImage: https://upload.wikimedia.org/wikipedia/en/5/5d/Hades_II_gameplay.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
+heroImage: /covers/hades-ii-rpg.png
 impactScore: 8
 sourceUrl: https://en.wikipedia.org/wiki/Hades_II
 summary: Hades II is a roguelike action role-playing game developed and published
   by Supergiant Games, serving as the studio's first sequel to Hades (2020).
 ---
+
+
 
 
 

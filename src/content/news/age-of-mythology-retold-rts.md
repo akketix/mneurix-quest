@@ -8,7 +8,7 @@ platforms:
 - PC
 - Xbox Series X|S
 releaseWindow: Available Now
-heroImage: /covers/age-of-mythology-retold-rts.png
+heroImage: /covers/age-of-mythology-retold-rts.jpg
 impactScore: 9
 sourceUrl: https://www.ageofempires.com/games/aom-retold/
 summary: 'World''s Edge details reusable God Powers, myth unit balance, and modern
@@ -17,6 +17,8 @@ specs:
   minimum: Intel Core i3-4130 / AMD FX-4350, 8 GB RAM, NVIDIA GTX 650
   recommended: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1060
 ---
+
+
 
 
 World's Edge and Xbox Game Studios have published post-launch technical documentation for *Age of Mythology: Retold*, detailing how classic RTS mechanics were overhauled with modernized engine technology and balance updates.

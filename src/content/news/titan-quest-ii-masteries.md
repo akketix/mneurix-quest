@@ -10,7 +10,7 @@ platforms:
 - PS5
 - Xbox Series X|S
 releaseWindow: Early Access Q4 2026
-heroImage: /covers/titan-quest-ii-masteries.png
+heroImage: /covers/titan-quest-ii-masteries.jpg
 impactScore: 8
 sourceUrl: https://titanquest2.thqnordic.com/
 summary: Grimlore Games breaks down mythological Greek settings, dual-mastery class
@@ -20,6 +20,8 @@ specs:
   recommended: Intel Core i7-12700 / AMD Ryzen 7 5700X, 32 GB RAM, NVIDIA RTX 3070
     Ti
 ---
+
+
 
 
 Grimlore Games and THQ Nordic have published developer blog notes for *Titan Quest II*, detailing how players combine any two elemental or martial Masteries to form unique hybrid character builds in ancient Greece.

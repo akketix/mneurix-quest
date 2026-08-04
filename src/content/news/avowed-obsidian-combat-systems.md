@@ -9,7 +9,7 @@ platforms:
 - PC
 - Xbox Series X|S
 releaseWindow: February 18, 2026
-heroImage: /covers/avowed-obsidian-combat-systems.png
+heroImage: /covers/avowed-obsidian-combat-systems.jpeg
 impactScore: 9
 sourceUrl: https://avowed.obsidian.net/
 summary: Obsidian details first-person dual-wielding combinations, wand magic, companion
@@ -18,6 +18,8 @@ specs:
   minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GTX 1070
   recommended: Intel Core i7-10700K / AMD Ryzen 5 5600X, 16 GB RAM, NVIDIA RTX 3070
 ---
+
+
 
 
 Obsidian Entertainment has published extensive combat loadout notes for *Avowed*, set in the world of Eora (Pillars of Eternity). The first-person RPG emphasizes fluid weapon and magic swapping without rigid class restrictions.

@@ -19,6 +19,8 @@ specs:
 ---
 
 
+
+
 Shiro Games and Funcom have deployed a major patch for *Dune: Spice Wars*, expanding the strategic depth of Conquest Mode with faction-specific Hero units and updated Landsraad voting cycles.
 
 ## Tactical & Political Overhauls

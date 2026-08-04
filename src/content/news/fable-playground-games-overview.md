@@ -8,7 +8,7 @@ platforms:
 - PC
 - Xbox Series X|S
 releaseWindow: 2026 Target
-heroImage: /covers/fable-playground-games-overview.png
+heroImage: /covers/fable-playground-games-overview.jpg
 impactScore: 10
 sourceUrl: https://www.xbox.com/en-US/games/fable
 summary: Playground Games outlines custom open-world engine rendering, character reputation
@@ -17,6 +17,8 @@ specs:
   minimum: Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA RTX 2070
   recommended: Intel Core i7-12700K / AMD Ryzen 7 5800X3D, 32 GB RAM, NVIDIA RTX 4070
 ---
+
+
 
 
 Playground Games and Xbox Game Studios have published a technical architecture overview for *Fable*, detailing how the custom ForzaTech engine was expanded to support open-world action RPG combat, dense flora simulation, and NPC behavioral reactivity.

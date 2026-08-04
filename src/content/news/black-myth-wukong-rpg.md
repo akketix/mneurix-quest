@@ -9,12 +9,14 @@ platforms:
 - Windows
 - Xbox Series X/S
 releaseWindow: August 20, 2024 (PS5, Windows); August 20, 2025 (Xbox Series X/S)
-heroImage: https://upload.wikimedia.org/wikipedia/en/a/a6/Black_Myth_Wukong_cover_art.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original
+heroImage: /covers/black-myth-wukong-rpg.jpg
 impactScore: 8
 sourceUrl: https://en.wikipedia.org/wiki/Black_Myth:_Wukong
 summary: Developed and published by Chinese studio Game Science using Unreal Engine
   5
 ---
+
+
 
 
 

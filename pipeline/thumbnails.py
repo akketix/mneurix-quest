@@ -59,8 +59,12 @@ def _reachable(url: str, timeout: float = 8.0) -> bool:
 def resolve_steam_screenshot(appid: int, timeout: float = 12.0) -> str | None:
     """Pull a real in-game screenshot (or header) from the Steam appdetails API."""
     try:
-        with httpx.Client(timeout=timeout, headers={"User-Agent": "MNEURIX-Quest/1.0"}) as c:
-            r = c.get(f"https://store.steampowered.com/api/appdetails?appids={appid}&l=english")
+        with httpx.Client(
+            timeout=timeout, headers={"User-Agent": "MNEURIX-Quest/1.0"}
+        ) as c:
+            r = c.get(
+                f"https://store.steampowered.com/api/appdetails?appids={appid}&l=english"
+            )
         data = r.json()
         app = data.get(str(appid), {}).get("data", {}) or {}
         shots = app.get("screenshots") or []
@@ -79,7 +83,16 @@ def resolve_wikipedia_image(game_title: str, timeout: float = 12.0) -> str | Non
         return None
     ua = "MNEURIX-Quest/1.0 (https://mneurix.quest; hello@mneurix.quest)"
     skip_ext = (".svg", ".webm", ".ogv", ".gif", ".tif", ".tiff", ".ogg", ".pdf")
-    skip_words = ("flag", "logo", "map", "icon", "collage", "cosplay", "poster", "award")
+    skip_words = (
+        "flag",
+        "logo",
+        "map",
+        "icon",
+        "collage",
+        "cosplay",
+        "poster",
+        "award",
+    )
 
     def score(fname: str) -> int:
         low = fname.lower()
@@ -97,12 +110,18 @@ def resolve_wikipedia_image(game_title: str, timeout: float = 12.0) -> str | Non
         with httpx.Client(timeout=timeout, headers={"User-Agent": ua}) as c:
             r = c.get(
                 "https://en.wikipedia.org/w/api.php",
-                params={"action": "query", "format": "json", "titles": game_title, "prop": "images", "imlimit": 20},
+                params={
+                    "action": "query",
+                    "format": "json",
+                    "titles": game_title,
+                    "prop": "images",
+                    "imlimit": 20,
+                },
             )
             pages = r.json().get("query", {}).get("pages", {})
             files: list[str] = []
             for pg in pages.values():
-                for im in (pg.get("images") or []):
+                for im in pg.get("images") or []:
                     files.append(im.get("title", ""))
             ranked = sorted(
                 [(f, score(f)) for f in files], key=lambda x: x[1], reverse=True
@@ -112,9 +131,15 @@ def resolve_wikipedia_image(game_title: str, timeout: float = 12.0) -> str | Non
                     continue
                 rr = c.get(
                     "https://en.wikipedia.org/w/api.php",
-                    params={"action": "query", "format": "json", "titles": fname, "prop": "imageinfo", "iiprop": "url"},
+                    params={
+                        "action": "query",
+                        "format": "json",
+                        "titles": fname,
+                        "prop": "imageinfo",
+                        "iiprop": "url",
+                    },
                 )
-                for p in (rr.json().get("query", {}).get("pages", {}).values()):
+                for p in rr.json().get("query", {}).get("pages", {}).values():
                     ii = p.get("imageinfo") or []
                     if ii and ii[0].get("url"):
                         return ii[0]["url"]
@@ -151,6 +176,40 @@ def resolve_official_thumbnail(facts: dict[str, Any], source_url: str) -> str | 
     if wiki:
         return wiki
     return None
+
+
+_IMG_EXT = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp", "image/gif": ".gif"}
+
+
+def _ext_from_url(url: str) -> str:
+    path = url.split("?", 1)[0].split("#", 1)[0]
+    seg = path.rsplit("/", 1)[-1]
+    if "." in seg:
+        ext = seg.rsplit(".", 1)[-1].lower()
+        if ext.isalpha() and len(ext) <= 5:
+            return "." + ext
+    return ""
+
+
+def localize_image(url: str, slug: str, timeout: float = 30.0) -> str | None:
+    """Download a remote image into public/covers/<slug><ext>; return the public
+    path '/covers/<slug><ext>' or None on failure."""
+    if not url or not url.startswith(("http://", "https://")):
+        return None
+    COVERS_DIR.mkdir(parents=True, exist_ok=True)
+    ua = "MNEURIX-Quest/1.0 (https://mneurix.quest; hello@mneurix.quest)"
+    try:
+        with httpx.Client(timeout=timeout, follow_redirects=True, headers={"User-Agent": ua}) as c:
+            r = c.get(url)
+        if r.status_code >= 400 or not r.content:
+            return None
+        ext = _ext_from_url(url) or _IMG_EXT.get(r.headers.get("content-type", ""), "") or ".jpg"
+        out = COVERS_DIR / f"{slug}{ext}"
+        out.write_bytes(r.content)
+        return f"{_PUBLIC_PREFIX}/{slug}{ext}"
+    except Exception as e:
+        logger.warning(f"localize_image failed for {url}: {e}")
+        return None
 
 
 def _comfyui_reachable() -> bool:
