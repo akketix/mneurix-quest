@@ -113,7 +113,7 @@ def publish_article(
     file_path = SITE_NEWS_DIR / f"{slug}.md"
     date_str = datetime.now().strftime("%Y-%m-%d")
     pub = str(facts.get("publishDate") or "").strip()
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", pub):
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", pub) and pub <= date_str:
         date_str = pub
     article_title = (
         title

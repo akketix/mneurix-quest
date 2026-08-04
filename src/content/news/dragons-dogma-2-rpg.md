@@ -1,16 +1,22 @@
 ---
-title: "Dragon's Dogma 2"
-date: "2026-10-09"
-gameTitle: "Dragon's Dogma 2"
-developer: "Capcom"
-genre: "RPG"
-platforms: ["PlayStation 5", "Windows", "Xbox Series X/S", "Nintendo Switch 2"]
-releaseWindow: "October 9, 2026 (Dark Arisen)"
-heroImage: "/covers/dragons-dogma-2-rpg.jpg"
+title: Dragon's Dogma 2
+date: '2026-08-04'
+gameTitle: Dragon's Dogma 2
+developer: Capcom
+genre: RPG
+platforms:
+- PlayStation 5
+- Windows
+- Xbox Series X/S
+- Nintendo Switch 2
+releaseWindow: October 9, 2026 (Dark Arisen)
+heroImage: /covers/dragons-dogma-2-rpg.jpg
 impactScore: 8
-sourceUrl: "https://en.wikipedia.org/wiki/Dragon%27s_Dogma_2"
-summary: "Action role-playing game developed and published by Capcom, released for PS5, Windows, and Xbox Series X/S on March 22, 2024"
+sourceUrl: https://en.wikipedia.org/wiki/Dragon%27s_Dogma_2
+summary: Action role-playing game developed and published by Capcom, released for
+  PS5, Windows, and Xbox Series X/S on March 22, 2024
 ---
+
 
 Capcom will release *Dragon's Dogma 2: Dark Arisen*, an expanded version of its 2024 action role-playing game, on October 9, 2026. The release brings the title to PlayStation 5, Windows, Xbox Series X/S, and notably adds a Nintendo Switch 2 version to the platform lineup.
 
