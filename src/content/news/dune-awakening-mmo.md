@@ -1,7 +1,7 @@
 ---
 title: 'Dune: Awakening survival MMO launches on PC with console release set for September
   2026'
-date: '2026-08-04'
+date: '2025-06-10'
 gameTitle: 'Dune: Awakening'
 developer: Funcom
 genre: MMO

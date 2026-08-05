@@ -1,6 +1,6 @@
 ---
 title: Manor Lords
-date: '2025-10-02'
+date: '2024-04-26'
 gameTitle: Manor Lords
 developer: Slavic Magic
 genre: RTS

@@ -1,6 +1,6 @@
 ---
 title: Elden Ring Announced for Nintendo Switch 2 with August 2026 Release Date
-date: '2026-08-04'
+date: '2026-06-04'
 gameTitle: Elden Ring
 developer: FromSoftware
 genre: RPG

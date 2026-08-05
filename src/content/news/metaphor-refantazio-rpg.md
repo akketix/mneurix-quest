@@ -1,7 +1,7 @@
 ---
 title: 'Metaphor: ReFantazio — Studio Zero''s Acclaimed RPG Releasing on Nintendo
   Switch 2 in November 2026'
-date: '2026-08-04'
+date: '2026-06-04'
 gameTitle: 'Metaphor: ReFantazio'
 developer: Studio Zero
 genre: RPG

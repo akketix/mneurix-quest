@@ -37,9 +37,12 @@ Output strict JSON with these fields:
 - keyFacts: array of 3 concise bullet strings, each grounded in the source
 - headline: a descriptive article title summarizing the news in this source
   (not just the game name)
-- publishDate: ISO date (YYYY-MM-DD) of the PRIMARY news event this article
-  reports; use the most recent relevant event date mentioned in the source;
-  empty string if no date is determinable
+- publishDate: ISO date (YYYY-MM-DD) of when this subject matter was REVEALED
+  or ANNOUNCED to the public (the announcement date, or the release date if
+  already released). NEVER use a future release date - if the subject is an
+  upcoming or port release, use its announcement date instead. This date
+  establishes the news's relevance (old vs current), so it must be a past date.
+  Empty string if no date is determinable
 - evidence: object mapping each of the fields above to a short verbatim span
   from the source that backs it (or null if the field was empty/unknown)
 
