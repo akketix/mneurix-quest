@@ -291,15 +291,18 @@ def generate_ai_thumbnail(
         f"no text, no watermark, high detail, cinematic"
     )
     # Minimal ComfyUI txt2img workflow (API format). Generous try/except = fail-closed.
+    # Uses SDXL Turbo (sd_xl_turbo_1.0) with Turbo-appropriate sampling: few steps,
+    # low CFG, euler. The prior sd_xl_base_1.0 checkpoint is not present in this
+    # ComfyUI instance, which caused /prompt 400s and silent branded fallbacks.
     workflow = {
         "3": {
             "class_type": "KSampler",
             "inputs": {
                 "seed": abs(hash(prompt)) % (10**9),
-                "steps": 28,
-                "cfg": 7.0,
-                "sampler_name": "dpmpp_2m",
-                "scheduler": "karras",
+                "steps": 8,
+                "cfg": 1.5,
+                "sampler_name": "euler",
+                "scheduler": "normal",
                 "denoise": 1.0,
                 "model": ["4", 0],
                 "positive": ["6", 0],
@@ -309,7 +312,7 @@ def generate_ai_thumbnail(
         },
         "4": {
             "class_type": "CheckpointLoaderSimple",
-            "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"},
+            "inputs": {"ckpt_name": "sd_xl_turbo_1.0.safetensors"},
         },
         "5": {
             "class_type": "EmptyLatentImage",
