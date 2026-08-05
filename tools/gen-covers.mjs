@@ -31,14 +31,14 @@ const SANS = `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, 
 const GENRE_COLOR = { RTS: SKY, MMO: EMERALD, RPG: VIOLET, HARDWARE: AMBER };
 
 function radarReticle(size, stroke, accent = CYAN) {
-  const c = size / 2;
-  const rOuter = size * 0.4;
-  const rMid = size * 0.26;
-  const rDot = size * 0.05;
-  const arm = size * 0.46;
-  const sweepX = c + rOuter * Math.sin(Math.PI / 6);
-  const sweepY = c - rOuter * Math.cos(Math.PI / 6);
-  return `
+	const c = size / 2;
+	const rOuter = size * 0.4;
+	const rMid = size * 0.26;
+	const rDot = size * 0.05;
+	const arm = size * 0.46;
+	const sweepX = c + rOuter * Math.sin(Math.PI / 6);
+	const sweepY = c - rOuter * Math.cos(Math.PI / 6);
+	return `
   <g stroke="${accent}" fill="none" stroke-width="${stroke}" stroke-linecap="round">
     <circle cx="${c}" cy="${c}" r="${rOuter}" opacity="0.55"/>
     <circle cx="${c}" cy="${c}" r="${rMid}" opacity="0.9"/>
@@ -51,31 +51,36 @@ function radarReticle(size, stroke, accent = CYAN) {
 
 // Word-wrap a title into <=3 lines of <= ~34 chars for the cover layout.
 function wrapTitle(title) {
-  const max = 34;
-  const words = String(title || "").split(/\s+/).filter(Boolean);
-  const lines = [];
-  let cur = "";
-  for (const w of words) {
-    if ((cur + " " + w).trim().length > max && cur) {
-      lines.push(cur);
-      cur = w;
-    } else {
-      cur = (cur + " " + w).trim();
-    }
-  }
-  if (cur) lines.push(cur);
-  return lines.slice(0, 3);
+	const max = 34;
+	const words = String(title || "")
+		.split(/\s+/)
+		.filter(Boolean);
+	const lines = [];
+	let cur = "";
+	for (const w of words) {
+		if ((cur + " " + w).trim().length > max && cur) {
+			lines.push(cur);
+			cur = w;
+		} else {
+			cur = (cur + " " + w).trim();
+		}
+	}
+	if (cur) lines.push(cur);
+	return lines.slice(0, 3);
 }
 
 function coverSvg(gameTitle, genre) {
-  const genreColor = GENRE_COLOR[genre] || CYAN;
-  const lines = wrapTitle(gameTitle);
-  const lineH = 46;
-  const startY = 300 - ((lines.length - 1) * lineH) / 2;
-  const titleTspans = lines
-    .map((ln, i) => `<text x="72" y="${startY + i * lineH}" font-family="${SANS}" font-size="40" font-weight="700" fill="${HEADING}">${escapeXml(ln)}</text>`)
-    .join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+	const genreColor = GENRE_COLOR[genre] || CYAN;
+	const lines = wrapTitle(gameTitle);
+	const lineH = 46;
+	const startY = 300 - ((lines.length - 1) * lineH) / 2;
+	const titleTspans = lines
+		.map(
+			(ln, i) =>
+				`<text x="72" y="${startY + i * lineH}" font-family="${SANS}" font-size="40" font-weight="700" fill="${HEADING}">${escapeXml(ln)}</text>`,
+		)
+		.join("");
+	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${BG}"/><stop offset="1" stop-color="#0b0e14"/>
@@ -98,30 +103,51 @@ function coverSvg(gameTitle, genre) {
 }
 
 function escapeXml(s) {
-  return String(s).replace(/[<>&'"]/g, (ch) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[ch]));
+	return String(s).replace(
+		/[<>&'"]/g,
+		(ch) =>
+			({
+				"<": "&lt;",
+				">": "&gt;",
+				"&": "&amp;",
+				"'": "&apos;",
+				'"': "&quot;",
+			})[ch],
+	);
 }
 
 async function renderOne(slug, gameTitle, genre) {
-  const svg = coverSvg(gameTitle, genre);
-  const outPath = path.join(OUT_DIR, `${slug}.png`);
-  await sharp(Buffer.from(svg)).png({ quality: 90, compressionLevel: 9 }).toFile(outPath);
-  return outPath;
+	const svg = coverSvg(gameTitle, genre);
+	const outPath = path.join(OUT_DIR, `${slug}.png`);
+	await sharp(Buffer.from(svg))
+		.png({ quality: 90, compressionLevel: 9 })
+		.toFile(outPath);
+	return outPath;
 }
 
 async function main() {
-  await mkdir(OUT_DIR, { recursive: true });
-  let specs;
-  if (process.argv[2] === "--single") {
-    specs = [{ slug: process.argv[3], gameTitle: process.argv[4], genre: process.argv[5] || "RPG" }];
-  } else {
-    const raw = await readFile(process.argv[2], "utf8");
-    specs = JSON.parse(raw);
-  }
-  for (const s of specs) {
-    if (!s.slug || !s.gameTitle) continue;
-    const out = await renderOne(s.slug, s.gameTitle, s.genre || "RPG");
-    console.log(`✓ ${out}`);
-  }
+	await mkdir(OUT_DIR, { recursive: true });
+	let specs;
+	if (process.argv[2] === "--single") {
+		specs = [
+			{
+				slug: process.argv[3],
+				gameTitle: process.argv[4],
+				genre: process.argv[5] || "RPG",
+			},
+		];
+	} else {
+		const raw = await readFile(process.argv[2], "utf8");
+		specs = JSON.parse(raw);
+	}
+	for (const s of specs) {
+		if (!s.slug || !s.gameTitle) continue;
+		const out = await renderOne(s.slug, s.gameTitle, s.genre || "RPG");
+		console.log(`✓ ${out}`);
+	}
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+main().catch((e) => {
+	console.error(e);
+	process.exit(1);
+});

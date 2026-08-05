@@ -178,7 +178,12 @@ def resolve_official_thumbnail(facts: dict[str, Any], source_url: str) -> str | 
     return None
 
 
-_IMG_EXT = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp", "image/gif": ".gif"}
+_IMG_EXT = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+    "image/gif": ".gif",
+}
 
 
 def _ext_from_url(url: str) -> str:
@@ -199,11 +204,17 @@ def localize_image(url: str, slug: str, timeout: float = 30.0) -> str | None:
     COVERS_DIR.mkdir(parents=True, exist_ok=True)
     ua = "MNEURIX-Quest/1.0 (https://mneurix.quest; hello@mneurix.quest)"
     try:
-        with httpx.Client(timeout=timeout, follow_redirects=True, headers={"User-Agent": ua}) as c:
+        with httpx.Client(
+            timeout=timeout, follow_redirects=True, headers={"User-Agent": ua}
+        ) as c:
             r = c.get(url)
         if r.status_code >= 400 or not r.content:
             return None
-        ext = _ext_from_url(url) or _IMG_EXT.get(r.headers.get("content-type", ""), "") or ".jpg"
+        ext = (
+            _ext_from_url(url)
+            or _IMG_EXT.get(r.headers.get("content-type", ""), "")
+            or ".jpg"
+        )
         out = COVERS_DIR / f"{slug}{ext}"
         out.write_bytes(r.content)
         return f"{_PUBLIC_PREFIX}/{slug}{ext}"

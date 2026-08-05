@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # commit + push maintenance fixes
-  issues: write     # upsert the reminder issue
+  contents: write # commit + push maintenance fixes
+  issues: write # upsert the reminder issue
 
 jobs:
   maintain:
