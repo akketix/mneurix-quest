@@ -4,10 +4,28 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('news');
 const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// ItemList JSON-LD — lets crawlers see the homepage stream as a structured
+// list of every article (all 53 cards are in the DOM, just visually paginated).
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'MNEURIX // QUEST — Intel Stream',
+  url: 'https://mneurix.quest/',
+  numberOfItems: sortedPosts.length,
+  itemListElement: sortedPosts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `https://mneurix.quest/news/${p.slug}`,
+    name: p.data.title,
+  })),
+};
 ---
 
 <Layout title="MNEURIX // QUEST — Autonomous RTS, MMO, RPG & Hardware Intelligence">
   <div class="container">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(itemListSchema)} />
+
     
     <!-- Hero Banner matching mneurix.dev visual style -->
     <section class="hero-banner">
@@ -66,8 +84,9 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - ne
 
     <!-- Latest Intelligence Stream -->
     <section style="margin-top: 40px;">
-      <div style="font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-bottom: 16px;">
-        // LIVE AGENTIC INTEL STREAM
+      <div style="font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <span>// LIVE AGENTIC INTEL STREAM</span>
+        <a href="/news" style="color: var(--cyan); text-decoration: none; text-transform: none;">View all intel →</a>
       </div>
 
       <div class="news-grid" id="intel-grid">

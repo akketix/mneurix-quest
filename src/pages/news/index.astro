@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Canonical /news archive — a clean, SEO-indexable hub for every article
+// (the homepage shows the stream inline, but this is the dedicated crawl hub).
+const allPosts = await getCollection('news');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const description = `The full MNEURIX // QUEST intel archive — every verified RTS, MMO, RPG & hardware breakdown, newest first.`;
+
+// BreadcrumbList JSON-LD
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mneurix.quest/' },
+    { '@type': 'ListItem', position: 2, name: 'All Intel', item: 'https://mneurix.quest/news' },
+  ],
+};
+
+// CollectionPage + ItemList JSON-LD — the full archive as a structured list
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'All Intel — MNEURIX // QUEST',
+  url: 'https://mneurix.quest/news',
+  description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: sortedPosts.length,
+    itemListElement: sortedPosts.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://mneurix.quest/news/${p.slug}`,
+      name: p.data.title,
+    })),
+  },
+};
+---
+
+<Layout title="All Intel — MNEURIX // QUEST" description={description}>
+  <div class="container">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionSchema)} />
+
+    <nav style="font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin: 20px 0 12px;" aria-label="Breadcrumb">
+      <a href="/" style="color: var(--text-muted);">ALL INTEL</a>
+      <span style="margin: 0 8px; opacity: 0.5;">/</span>
+      <a href="/news" style="color: var(--cyan);">ARCHIVE</a>
+    </nav>
+
+    <div style="margin: 16px 0 24px;">
+      <div class="eyebrow">INTEL ARCHIVE // ALL SECTORS</div>
+      <h1 style="font-size: 32px; color: var(--text-heading);">All Intel</h1>
+      <p style="color: var(--text-muted); margin-top: 8px;">
+        {sortedPosts.length} verified breakdowns across RTS, MMO, RPG &amp; hardware — newest first.
+      </p>
+    </div>
+
+    <div class="news-grid" id="intel-grid">
+      {sortedPosts.map((post) => (
+        <article class="news-card">
+          <a href={`/news/${post.slug}`}>
+            <img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+          </a>
+          <div class="news-card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class={`tech-pill ${post.data.genre.toLowerCase()}`}>{post.data.genre}</span>
+              <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">
+                {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </span>
+            </div>
+            <h2 class="news-card-title">
+              <a href={`/news/${post.slug}`}>{post.data.title}</a>
+            </h2>
+            <p class="news-card-summary">{post.data.summary}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;">
+              <span style="font-family: var(--mono); font-size: 11px; color: var(--text-muted);">{post.data.developer}</span>
+              <span style="font-family: var(--mono); font-size: 11px; color: var(--cyan);">Impact: {post.data.impactScore}/10</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {sortedPosts.length > 9 && (
+      <>
+        <div style="text-align: center; margin: 24px 0 48px;">
+          <button id="load-more" class="btn primary" type="button">LOAD MORE INTEL ↓</button>
+        </div>
+        <script is:inline define:vars={{ total: sortedPosts.length }}>
+          (function(){
+            var grid = document.getElementById('intel-grid');
+            var btn = document.getElementById('load-more');
+            if (!grid || !btn) return;
+            var cards = grid.querySelectorAll('article.news-card');
+            var perPage = 9; var shown = perPage;
+            function apply(){ for (var i=0;i<cards.length;i++){ cards[i].style.display = i < shown ? '' : 'none'; } if (shown >= cards.length){ btn.style.display='none'; } }
+            apply();
+            btn.addEventListener('click', function(){ shown += perPage; apply(); });
+          })();
+        </script>
+      </>
+    )}
+  </div>
+</Layout>

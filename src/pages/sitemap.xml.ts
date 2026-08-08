@@ -19,6 +19,7 @@ export async function GET() {
   // pages omit lastmod (they rarely change; changefreq + priority suffice).
   const contentPages = [
     { url: '/', priority: '1.0', changefreq: 'daily' },
+    { url: '/news', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/rts', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/mmo', priority: '0.9', changefreq: 'daily' },
     { url: '/genre/rpg', priority: '0.9', changefreq: 'daily' },

@@ -56,6 +56,19 @@ const breadcrumbSchema = {
   ],
 };
 
+// VideoObject JSON-LD — only when an official trailer is embedded
+const videoSchema = trailerId ? {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: `${gameTitle} — Official Trailer`,
+  description: `Official announcement trailer for ${gameTitle} by ${developer}.`,
+  thumbnailUrl: heroImage,
+  contentUrl: `https://www.youtube.com/watch?v=${trailerId}`,
+  embedUrl: `https://www.youtube.com/embed/${trailerId}`,
+  uploadDate: publishedISO,
+  publisher: { '@type': 'Organization', name: developer },
+} : null;
+
 // Reading time estimate (200 wpm)
 const wordCount = (post.body || '').trim().split(/\s+/).filter(Boolean).length;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
@@ -65,6 +78,9 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
   <article class="container" style="max-width: 860px;">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+    {videoSchema && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(videoSchema)} />
+    )}
 
     <header class="article-header">
       <nav style="font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">

@@ -20,6 +20,19 @@ const filteredPosts = allPosts
 
 const genreLower = genreTag.toLowerCase();
 const description = `Filtered coverage tracking verified updates for ${genreTag} titles — engine analyses, mechanics, and release windows.`;
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${title} — MNEURIX // QUEST`,
+  url: `https://mneurix.quest/genre/${genreLower}`,
+  numberOfItems: filteredPosts.length,
+  itemListElement: filteredPosts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `https://mneurix.quest/news/${p.slug}`,
+    name: p.data.title,
+  })),
+};
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -33,6 +46,7 @@ const breadcrumbSchema = {
 <Layout title={`MNEURIX // ${genreTag} — ${title}`} description={description}>
   <div class="container">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(itemListSchema)} />
     <nav style="font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin: 20px 0 12px;" aria-label="Breadcrumb">
       <a href="/" style="color: var(--text-muted);">ALL INTEL</a>
       <span style="margin: 0 8px; opacity: 0.5;">/</span>
